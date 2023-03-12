@@ -10,13 +10,24 @@ import userRouter from './router/user.js'
 
 const app = express()
 
+app.get('/test', function (req, res) {
+  res.send("恭喜跑通了")
+})
+
+// app.post('/user/sendCode/:phnoeNumber', function (req, res) {
+//   res.send(req.params)
+// })
+
+
 app.use(cors())
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({
+  extended: false
+}))
 app.use(bodyParser.json())
 app.use(express.urlencoded({
   extended: false
 }))
-app.use('/api', userRouter)
+app.use( userRouter)
 // 错误中间件
 // app.use(function (err, req, res, next) {
 //   // 数据验证失败
@@ -48,6 +59,7 @@ app.use('/api', userRouter)
 // }).unless({
 //   path: [/^\/api\//]
 // }))
+
 
 
 

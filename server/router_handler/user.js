@@ -6,6 +6,16 @@ import bcrypt from 'bcryptjs'
 // import jwt from 'jsonwebtoken'
 // import jwtSecretKey from '../config.js'
 
+// 发送验证码的处理函数
+export const sendVerifyCode = (req, res) => {
+    let result = []
+    let arr = req.params.phoneNumber.split('')
+    while (result.length < 4) {
+        const randomIndex = Math.floor(Math.random() * arr.length)
+        result.push(arr[randomIndex] * 3 % 5)
+    }
+    res.send(result.join(''))
+}
 
 // 注册用户的处理函数
 export const regUser = (req, res) => {

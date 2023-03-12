@@ -15,13 +15,13 @@ import {
 
 // 路由懒加载
 const Regist = () => import("@/pages/Regist/Regist.vue")
+const Login = () => import("@/pages/Login/Login.vue")
 const Home = () => import("@/pages/Home/Home.vue")
 const Search = () => import("@/pages/Search/Search.vue")
 const Detail = () => import("@/pages/Detail/Deatil.vue")
 
 
-const routes = [
-    {
+const routes = [{
         path: '/',
         redirect: '/home'
     },
@@ -29,6 +29,14 @@ const routes = [
         path: '/regist',
         component: Regist,
         name: 'Regist',
+        meta: {
+            show: false
+        }
+    },
+    {
+        path: '/login',
+        component: Login,
+        name: 'Login',
         meta: {
             show: false
         }
