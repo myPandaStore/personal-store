@@ -1,37 +1,172 @@
+<script setup></script>
 <template>
-  <Form @submit="submit">
-    <Field name="name" label="Name" :rules="nameRules" />
-    <ErrorMessage name="name" />
+  <div class="login">
+    <div class="login_main">
+      <div class="login_main_item">
+        <div class="login_main_item_top">
+          <div class="login_main_item_top_left">扫描登录</div>
+          <div class="login_main_item_top_right">账户登录</div>
+        </div>
+        <div class="login_main_item_phone">
+          <div class="login_main_item_phone_left"></div>
+          <input type="text" class="login_main_item_phone_right" placeholder="手机号" />
+        </div>
+        <div class="login_main_item_code">
+          <div class="login_main_item_code_left"></div>
+          <input
+            type="text"
+            class="login_main_item_code_right"
+            placeholder="请输入密码"
+          />
+        </div>
+        <div class="login_main_item_check">
+          <div class="login_main_item_check_left">
+            <input type="checkbox" /><span>自动登录</span>
+          </div>
 
-    <Field name="email" label="Email" :rules="validateEmail" />
-    <ErrorMessage name="email" />
-
-    <button type="submit">Submit</button>
-  </Form>
+          <div class="login_main_item_check_right">忘记密码？</div>
+        </div>
+        <button class="login_main_item_login">登录</button>
+      </div>
+    </div>
+    <div class="login_bottom">
+      <ul>
+        <li>关于我们</li>
+        <li>联系我们</li>
+        <li>联系客服</li>
+        <li>商家入驻</li>
+        <li>营销中心</li>
+        <li>手机尚品汇</li>
+        <li>销售联盟</li>
+        <li>尚品汇社区</li>
+      </ul>
+      <div class="address">地址：北京市昌平区宏福科技园综合楼6层</div>
+      <div class="beian">京ICP备19006430号</div>
+    </div>
+  </div>
 </template>
+<style lang="less">
+.login {
+  height: 487px;
+  margin-top: 20px;
+  background: url(@/assets/Login/loginbg.png) no-repeat;
+  background-color: #e93854;
 
-<script setup>
-import { ref } from "vue";
-import { useField } from "vee-validate";
-import * as yup from 'yup';
+  &_main {
+    position: relative;
+    height: 500px;
+    &_item {
+      position: absolute;
+      top: 0;
+      right: 70px;
+      background-color: white;
+      margin-top: 30px;
+      padding: 20px;
 
-const name = useField("name");
-const email = useField("email");
+      &_top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-const nameRules = ref("required");
-const emailRules = ref("required|email");
-const validateEmail = yup.string().required().email().min(13);
-const submit = () => {
+        &_left {
+          height: 50px;
+          line-height: 50px;
+          font-size: 20px;
+          font-weight: 700;
+          color: #333;
+          border: 1px solid #ddd;
+          padding: 0 40px;
+        }
 
-//   name.validate();
-  
-//   email.validate();
-  debugger
+        &_right {
+          height: 50px;
+          line-height: 50px;
+          font-size: 20px;
+          font-weight: 700;
+          color: red;
+          border: 1px solid #ddd;
+          padding: 0 40px;
+        }
+      }
 
-  if (name.errors.value.length || email.errors.value.length) {
-    return;
+      &_phone {
+        margin-top: 20px;
+        display: flex;
+
+        &_left {
+          background: url(@/assets/icons.png) no-repeat -10px -201px;
+          width: 37px;
+          height: 32px;
+          border: 1px solid #ccc;
+
+          box-sizing: border-box;
+          border-radius: 2px 0 0 2px;
+        }
+        &_right {
+          width: 100%;
+        }
+      }
+      &_code {
+        margin-top: 20px;
+        display: flex;
+
+        &_left {
+          background: url(@/assets/icons.png) no-repeat -72px -201px;
+          width: 37px;
+          height: 32px;
+          border: 1px solid #ccc;
+
+          box-sizing: border-box;
+          border-radius: 2px 0 0 2px;
+        }
+        &_right {
+          width: 100%;
+        }
+      }
+      &_check {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &_left {
+          display: flex;
+          align-items: center;
+        }
+      }
+      &_login {
+        width: 100%;
+        height: 36px;
+        background-color: red;
+        margin-top: 20px;
+
+        &:hover {
+            cursor: pointer;
+        }
+      }
+    }
   }
 
-  // handle form submission
-};
-</script>
+  &_bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & > ul {
+      margin-top: 20px;
+      list-style: none;
+      display: flex;
+
+      & > li {
+        padding-right: 10px;
+        padding-left: 10px;
+        border-right: 1px solid black;
+
+        &:last-child {
+          border: none;
+        }
+      }
+    }
+  }
+}
+</style>

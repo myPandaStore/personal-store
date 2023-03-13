@@ -10,7 +10,7 @@ const phoneNumber = ref("");
 const phoneNumberField = useField("phoneNumber");
 const validatePhoneNumber = yup.number().required().min(7);
 // 用户名
-const userName = ref("");
+const userName = ref(null);
 const userNameField = useField("userName");
 const validateUserName = yup.string().required().min(4);
 // 验证码
@@ -18,7 +18,7 @@ const verifyCode = ref(null);
 const verifyCodeField = useField("verifyCode");
 const validateverifyCode = yup.string().required().min(4);
 // 登录密码
-const loginCode = ref("");
+const loginCode = ref(null);
 const loginCodeField = useField("loginCode");
 const validateLoginCode = yup.string().required().min(8).max(13);
 // 确认密码
