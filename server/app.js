@@ -2,22 +2,13 @@ import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import userRouter from './router/user.js'
-// import joi from '@hapi/joi'
+import joi from 'joi'
 // import config from './config.js'
 // import {
 //   expressjwt
 // } from 'express-jwt'
 
 const app = express()
-
-app.get('/test', function (req, res) {
-  res.send("恭喜跑通了")
-})
-
-// app.post('/user/sendCode/:phnoeNumber', function (req, res) {
-//   res.send(req.params)
-// })
-
 
 app.use(cors())
 app.use(bodyParser.urlencoded({
@@ -27,30 +18,34 @@ app.use(bodyParser.json())
 app.use(express.urlencoded({
   extended: false
 }))
-app.use( userRouter)
-// 错误中间件
-// app.use(function (err, req, res, next) {
-//   // 数据验证失败
-//   if (err instanceof joi.ValidationError) {
-//     return res.send({
-//       status:1,
-//       message: err instanceof Error ? err.message : err
-//     })
-//   }
 
-//   // 未知错误
-//   // 捕获身份认证失败的错误
-//   if (err.name === 'UnauthorizedError'){
-//       return res.send({
-//         status: 1,
-//         message: '身份认证失败！'
-//       })
-//   } 
-//   res.send({
-//     status: 1,
-//     message: err
-//   })
-// })
+app.use(userRouter)
+
+// 错误中间件
+app.use(function (err, req, res, next) {
+  // 数据验证失败
+  if (err instanceof joi.ValidationError) {
+    return res.send({
+      status: 1,
+      message: err instanceof Error ? err.message : err
+      // message: '校验失败'
+    })
+  }
+
+  // 未知错误
+  // 捕获身份认证失败的错误
+  // if (err.name === 'UnauthorizedError'){
+  //     return res.send({
+  //       status: 1,
+  //       message: '身份认证失败！'
+  //     })
+  // } 
+  // res.send({
+  //   status: 1,
+  //   message: err
+  // })
+})
+
 // 使用 .unless({ path: [/^\/api\//] }) 指定哪些接口不需要进行 Token 的身份认证
 
 // app.use(expressjwt({

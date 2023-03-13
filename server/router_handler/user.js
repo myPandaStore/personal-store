@@ -19,6 +19,7 @@ export const sendVerifyCode = (req, res) => {
 
 // 注册用户的处理函数
 export const regUser = (req, res) => {
+    console.log(req.body)
     // 1.检测表单数据是否合法
     const userinfo = req.body[0].userinfo
 
