@@ -11,6 +11,8 @@ import Carousel from '@/components/Carousel.vue'
 import { Field, Form, ErrorMessage, defineRule, configure } from 'vee-validate';
 import { required, email } from '@vee-validate/rules';
 import { localize, setLocale } from '@vee-validate/i18n';
+import { createPinia } from 'pinia'
+
 
 // 定义规则
 defineRule('required', required);
@@ -52,5 +54,8 @@ app.directive('lazy', lazyDirective)
 
 // 路由
 app.use(router);
+
+// 集中式状态管理
+app.use(createPinia())
 
 app.mount("#app")

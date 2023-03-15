@@ -1,4 +1,31 @@
-<script setup></script>
+<script setup>
+import { ref} from "vue";
+import { useRouter } from "vue-router";
+// @ts-ignore
+import { userStore } from "@/stores/user.ts";
+
+// 用户名
+const name = ref("");
+
+// 登录密码
+const code = ref("");
+
+const router = useRouter()
+const loginUserStore = userStore();
+// 登录
+const login = async () => {
+  try {
+    let data = {
+      username: name.value,
+      password: code.value,
+    };
+    name && code && (await loginUserStore.userLogin(data));
+    router.push('/home')
+  } catch (error) {
+    alert(error.message);
+  }
+};
+</script>
 <template>
   <div class="login">
     <div class="login_main">
@@ -9,7 +36,12 @@
         </div>
         <div class="login_main_item_phone">
           <div class="login_main_item_phone_left"></div>
-          <input type="text" class="login_main_item_phone_right" placeholder="手机号" />
+          <input
+            type="text"
+            class="login_main_item_phone_right"
+            placeholder="用户名"
+            v-model="name"
+          />
         </div>
         <div class="login_main_item_code">
           <div class="login_main_item_code_left"></div>
@@ -17,6 +49,7 @@
             type="text"
             class="login_main_item_code_right"
             placeholder="请输入密码"
+            v-model="code"
           />
         </div>
         <div class="login_main_item_check">
@@ -26,7 +59,7 @@
 
           <div class="login_main_item_check_right">忘记密码？</div>
         </div>
-        <button class="login_main_item_login">登录</button>
+        <button class="login_main_item_login" @click="login">登录</button>
       </div>
     </div>
     <div class="login_bottom">
@@ -141,7 +174,7 @@
         margin-top: 20px;
 
         &:hover {
-            cursor: pointer;
+          cursor: pointer;
         }
       }
     }

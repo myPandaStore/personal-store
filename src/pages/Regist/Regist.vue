@@ -58,14 +58,10 @@ const userRegister = async () => {
     // 表单验证通过
     // 执行用户注册的逻辑，并跳转到 login 页面
 
-    let data = [
-      {
-        userinfo: {
-          username: userName.value,
-          password: loginCode.value,
-        },
-      },
-    ];
+    let data = {
+      username: userName.value,
+      password: loginCode.value,
+    };
     await reqUserResiter(data);
     router.push({ name: "Login" });
   }

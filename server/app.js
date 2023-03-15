@@ -1,12 +1,14 @@
+// @ts-nocheck
 import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import userRouter from './router/user.js'
+import userinfoRouter from './router/userinfo.js'
 import joi from 'joi'
-// import config from './config.js'
-// import {
-//   expressjwt
-// } from 'express-jwt'
+import config from './config.js'
+import {
+  expressjwt
+} from 'express-jwt'
 
 const app = express()
 
@@ -19,7 +21,8 @@ app.use(express.urlencoded({
   extended: false
 }))
 
-app.use(userRouter)
+app.use('/api', userRouter)
+app.use('/my', userinfoRouter)
 
 // 错误中间件
 app.use(function (err, req, res, next) {
@@ -27,35 +30,28 @@ app.use(function (err, req, res, next) {
   if (err instanceof joi.ValidationError) {
     return res.send({
       status: 1,
-      message: err instanceof Error ? err.message : err
-      // message: '校验失败'
+      // message: err instanceof Error ? err.message : err
+      message: err.message
     })
   }
 
   // 未知错误
   // 捕获身份认证失败的错误
-  // if (err.name === 'UnauthorizedError'){
-  //     return res.send({
-  //       status: 1,
-  //       message: '身份认证失败！'
-  //     })
-  // } 
-  // res.send({
-  //   status: 1,
-  //   message: err
-  // })
+  if (err.name === 'UnauthorizedError') {
+    return res.send({
+      status: 1,
+      message: '身份认证失败！'
+    })
+  }
 })
 
 // 使用 .unless({ path: [/^\/api\//] }) 指定哪些接口不需要进行 Token 的身份认证
-
-// app.use(expressjwt({
-//   secret: config.jwtSecretKey,
-//   algorithms: ["HS256"],
-// }).unless({
-//   path: [/^\/api\//]
-// }))
-
-
+app.use(expressjwt({
+  secret: config.jwtSecretKey,
+  algorithms: ["HS256"],
+}).unless({
+  path: [/^\/api\//]
+}))
 
 
 // 调用 app.listen 方法，指定端口号并启动web服务器

@@ -1,6 +1,5 @@
 import express from 'express'
 import {
-    sendVerifyCode,
     regUser,
     login
 } from '../router_handler/user.js'
@@ -9,8 +8,6 @@ import expressJoi from '@escook/express-joi'
 
 const router = express.Router()
 
-// 发送验证码
-router.post('/user/sendCode/:phoneNumber', sendVerifyCode)
 
 // 注册新用户
 // 在注册新用户的路由中，声明局部中间件，读当前请求中携带的数据进行验证
@@ -19,7 +16,7 @@ router.post('/user/sendCode/:phoneNumber', sendVerifyCode)
 router.post('/user/register', expressJoi(reg_login_schema), regUser)
 
 // 登录
-router.post('/login', login)
+router.post('/user/login', expressJoi(reg_login_schema), login)
 
 // 将路由对象共享出去
 export default router
