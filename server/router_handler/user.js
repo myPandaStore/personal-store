@@ -128,8 +128,300 @@ export const login = (req, res) => {
             message: '登录成功！',
             // 为了方便客户端使用 Token，在服务器端直接拼接上 Bearer 的前缀
             token: 'Bearer ' + tokenStr,
-          })
+            userName: username,
+            userInfo: results
+        })
     })
+}
 
+// 退出登录的处理函数
+export const logout = (req, res) => {
+    res.send({
+        status: 0,
+        message: '退出登录成功！',
+        token: "",
+        userName: "",
+        userInfo: ""
+    })
+}
 
+export const getBaseCategoryLis = (req, res) => {
+    let data = [{
+            status: 0
+        },
+        {
+            "cateGoryName@1": "  图书、音像、数字商品",
+            "cateGoryId": 0,
+            "cateGoryChild": {
+                "cateGoryName@2": [
+                    "电子书",
+                    "婚恋/两性",
+                    "文学",
+                    "经管",
+                    "畅读VIP"
+                ]
+            }
+        },
+        {
+            "cateGoryName@1": "家用电器",
+            "cateGoryId": 1,
+            "cateGoryChild": {
+                "cateGoryName@2": [
+                    "电子书才怪",
+                    "婚恋/两性",
+                    "文学",
+                    "经管",
+                    "畅读VIP"
+                ]
+            }
+        },
+        {
+            "cateGoryName@1": "手机、数码、充值",
+            "cateGoryId": 2,
+            "cateGoryChild": {
+                "cateGoryName@2": [
+                    "电子书",
+                    "婚恋/两性",
+                    "文学",
+                    "经管",
+                    "畅读VIP"
+                ]
+            }
+        },
+        {
+            "cateGoryName@1": "  图书、音像、数字商品",
+            "cateGoryId": 3,
+            "cateGoryChild": {
+                "cateGoryName@2": [
+                    "电子书",
+                    "婚恋/两性",
+                    "文学",
+                    "经管",
+                    "畅读VIP"
+                ]
+            }
+        },
+        {
+            "cateGoryName@1": "家用电器",
+            "cateGoryId": 4,
+            "cateGoryChild": {
+                "cateGoryName@2": [
+                    "电子书",
+                    "婚恋/两性",
+                    "文学",
+                    "经管",
+                    "畅读VIP"
+                ]
+            }
+        },
+        {
+            "cateGoryName@1": "手机、数码、充值",
+            "cateGoryId": 5,
+            "cateGoryChild": {
+                "cateGoryName@2": [
+                    "电子书",
+                    "婚恋/两性",
+                    "文学",
+                    "经管",
+                    "畅读VIP"
+                ]
+            }
+        },
+        {
+            "cateGoryName@1": "  图书、音像、数字商品",
+            "cateGoryId": 6,
+            "cateGoryChild": {
+                "cateGoryName@2": [
+                    "电子书",
+                    "婚恋/两性",
+                    "文学",
+                    "经管",
+                    "畅读VIP"
+                ]
+            }
+        },
+        {
+            "cateGoryName@1": "家用电器",
+            "cateGoryId": 7,
+            "cateGoryChild": {
+                "cateGoryName@2": [
+                    "电子书",
+                    "婚恋/两性",
+                    "文学",
+                    "经管",
+                    "畅读VIP"
+                ]
+            }
+        },
+        {
+            "cateGoryName@1": "手机、数码、充值",
+            "cateGoryId": 8,
+            "cateGoryChild": {
+                "cateGoryName@2": [
+                    "电子书",
+                    "婚恋/两性",
+                    "文学",
+                    "经管",
+                    "畅读VIP"
+                ]
+            }
+        },
+        {
+            "cateGoryName@1": "  图书、音像、数字商品",
+            "cateGoryId": 9,
+            "cateGoryChild": {
+                "cateGoryName@2": [
+                    "电子书",
+                    "婚恋/两性",
+                    "文学",
+                    "经管",
+                    "畅读VIP"
+                ]
+            }
+        },
+        {
+            "cateGoryName@1": "家用电器",
+            "cateGoryId": 10,
+            "cateGoryChild": {
+                "cateGoryName@2": [
+                    "电子书",
+                    "婚恋/两性",
+                    "文学",
+                    "经管",
+                    "畅读VIP"
+                ]
+            }
+        },
+        {
+            "cateGoryName@1": "手机、数码、充值",
+            "cateGoryId": 11,
+            "cateGoryChild": {
+                "cateGoryName@2": [
+                    "电子书",
+                    "婚恋/两性",
+                    "文学",
+                    "经管",
+                    "畅读VIP"
+                ]
+            }
+        },
+        {
+            "cateGoryName@1": "  图书、音像、数字商品",
+            "cateGoryId": 12,
+            "cateGoryChild": {
+                "cateGoryName@2": [
+                    "电子书",
+                    "婚恋/两性",
+                    "文学",
+                    "经管",
+                    "畅读VIP"
+                ]
+            }
+        },
+        {
+            "cateGoryName@1": "家用电器",
+            "cateGoryId": 13,
+            "cateGoryChild": {
+                "cateGoryName@2": [
+                    "电子书",
+                    "婚恋/两性",
+                    "文学",
+                    "经管",
+                    "畅读VIP"
+                ]
+            }
+        },
+        {
+            "cateGoryName@1": "手机、数码、充值",
+            "cateGoryId": 14,
+            "cateGoryChild": {
+                "cateGoryName@2": [
+                    "电子书",
+                    "婚恋/两性",
+                    "文学",
+                    "经管",
+                    "畅读VIP"
+                ]
+            }
+        },
+        {
+            "cateGoryName@1": "  图书、音像、数字商品",
+            "cateGoryId": 15,
+            "cateGoryChild": {
+                "cateGoryName@2": [
+                    "电子书",
+                    "婚恋/两性",
+                    "文学",
+                    "经管",
+                    "畅读VIP"
+                ]
+            }
+        },
+        {
+            "cateGoryName@1": "家用电器",
+            "cateGoryId": 16,
+            "cateGoryChild": {
+                "cateGoryName@2": [
+                    "电子书",
+                    "婚恋/两性",
+                    "文学",
+                    "经管",
+                    "畅读VIP"
+                ]
+            }
+        },
+        {
+            "cateGoryName@1": "手机、数码、充值",
+            "cateGoryId": 17,
+            "cateGoryChild": {
+                "cateGoryName@2": [
+                    "电子书",
+                    "婚恋/两性",
+                    "文学",
+                    "经管",
+                    "畅读VIP"
+                ]
+            }
+        },
+        {
+            "cateGoryName@1": "  图书、音像、数字商品",
+            "cateGoryId": 18,
+            "cateGoryChild": {
+                "cateGoryName@2": [
+                    "电子书",
+                    "婚恋/两性",
+                    "文学",
+                    "经管",
+                    "畅读VIP"
+                ]
+            }
+        },
+        {
+            "cateGoryName@1": "家用电器",
+            "cateGoryId": 19,
+            "cateGoryChild": {
+                "cateGoryName@2": [
+                    "电子书",
+                    "婚恋/两性",
+                    "文学",
+                    "经管",
+                    "畅读VIP"
+                ]
+            }
+        },
+        {
+            "cateGoryName@1": "手机、数码、充值",
+            "cateGoryId": 20,
+            "cateGoryChild": {
+                "cateGoryName@2": [
+                    "电子书",
+                    "婚恋/两性",
+                    "文学",
+                    "经管",
+                    "畅读VIP"
+                ]
+            }
+        }
+    ]
+    res.send(data)
 }

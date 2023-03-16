@@ -1,35 +1,53 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { useRouter} from "vue-router";
+import { ref, computed } from "vue";
+import { useRouter } from "vue-router";
+// @ts-ignore
+import { userStore } from "@/stores/user.ts";
 // @ts-ignore
 import img from "@/assets/logo.png";
 // head 部分 logo
 const logoImg = ref<string>(img);
 
 // 搜索框关键词
-const keyWord = ref('')
+const keyWord = ref("");
 
-const router = useRouter()
+// 用户名
+const useUserStore = userStore();
+const userName = computed(() => {
+  return useUserStore.userName;
+});
+
+const router = useRouter();
 // 跳转到 search 页面
 const goSearch = () => {
   router.push({
     // path: `/search/${keyWord.value}`,
-    name: 'Search',
+    name: "Search",
     params: {
-      keyword: keyWord.value
-    }
+      keyword: keyWord.value,
+    },
     // path: '/search',
     // query: {id:123}
-  })
-}
+  });
+};
+
+// 退出登录
+const logOut = async () => {
+  await useUserStore.userLogOut();
+  router.push("/regist");
+};
 </script>
 <template>
   <div class="head">
     <div class="head_top">
-      <div class="head_top_left">
+      <div class="head_top_left" v-if="!userName">
         <p>尚品汇欢迎您！</p>
-        <a href="###">请登录</a>
+        <router-link to="/login">请登录</router-link>
         <router-link to="/regist">免费注册</router-link>
+      </div>
+      <div class="head_top_left" v-else>
+        <p>用户名：{{ userName }}</p>
+        <router-link to="/regist" @click="logOut">退出登录</router-link>
       </div>
       <div class="head_top_right">
         <a href="###">我的订单</a>
@@ -48,7 +66,12 @@ const goSearch = () => {
       </router-link>
       <div class="head_search_container">
         <form class="form" action="" @submit.prevent>
-          <input type="text" id="autocomplete" class="head_search_container_input" v-model="keyWord" />
+          <input
+            type="text"
+            id="autocomplete"
+            class="head_search_container_input"
+            v-model="keyWord"
+          />
           <button class="head_search_container_button" @click="goSearch">搜索</button>
         </form>
       </div>
@@ -72,11 +95,11 @@ const goSearch = () => {
       height: inherit;
       margin-left: 112px;
 
-      &>p {
+      & > p {
         margin-right: 10px;
       }
 
-      &>a {
+      & > a {
         text-decoration: none;
         color: #666;
 
@@ -95,7 +118,7 @@ const goSearch = () => {
       align-items: center;
       margin-left: 380px;
 
-      &>a {
+      & > a {
         text-decoration: none;
         color: #666;
         height: 18px;
@@ -111,14 +134,14 @@ const goSearch = () => {
     display: flex;
     align-items: center;
 
-    &>.logo {
+    & > .logo {
       margin-left: 160px;
     }
 
     &_container {
       margin-left: 414px;
 
-      &>form {
+      & > form {
         display: flex;
       }
 

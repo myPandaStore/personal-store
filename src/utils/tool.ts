@@ -47,8 +47,6 @@ export const isSupportWebp = (function () {
   }
 }());
 
-
-
 export const setToken = (token) => {
   localStorage.setItem('TOKEN', token);
 }
@@ -59,4 +57,27 @@ export const removeToken = () => {
 
 export const getToken = () => {
   localStorage.getItem("TOKEN")
+}
+
+/**
+ * 
+ * @param fn 
+ * @param wait
+ */
+export const throttle = (fn, wait = 0) => {
+  let timerId
+  let lastInvoke = Number.MIN_SAFE_INTEGER //上次调用时间
+
+  return function (...args) {
+    // 当前时间
+    const curTime = new Date().getTime()
+    // 距离下次执行的剩余时间
+    const remain = Math.max(lastInvoke + wait - curTime, 0)
+    // 更新定时器，确保同一时间只有一个定时器在运行
+    clearTimeout(timerId)
+    timerId = setTimeout(() => {
+      lastInvoke = new Date().getTime()
+      fn(...args)
+    }, remain)
+  }
 }

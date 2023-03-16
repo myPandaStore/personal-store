@@ -1,7 +1,9 @@
 import express from 'express'
 import {
     regUser,
-    login
+    login,
+    logout,
+    getBaseCategoryLis
 } from '../router_handler/user.js'
 import reg_login_schema from '../schema/user.js'
 import expressJoi from '@escook/express-joi'
@@ -18,5 +20,10 @@ router.post('/user/register', expressJoi(reg_login_schema), regUser)
 // 登录
 router.post('/user/login', expressJoi(reg_login_schema), login)
 
+// 退出登录
+router.get('/user/logout', logout)
+
+// 三级列表的数据
+router.get('/product/getBaseCategoryList', getBaseCategoryLis)
 // 将路由对象共享出去
 export default router

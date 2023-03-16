@@ -1,5 +1,5 @@
 <script setup>
-import { ref} from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 // @ts-ignore
 import { userStore } from "@/stores/user.ts";
@@ -10,7 +10,7 @@ const name = ref("");
 // 登录密码
 const code = ref("");
 
-const router = useRouter()
+const router = useRouter();
 const loginUserStore = userStore();
 // 登录
 const login = async () => {
@@ -20,7 +20,14 @@ const login = async () => {
       password: code.value,
     };
     name && code && (await loginUserStore.userLogin(data));
-    router.push('/home')
+    // 测试 getuserinfo 后续添加到全局路由导航中
+    // debugger;
+    // await loginUserStore.getUserInfo({
+    //   username: "lmyll",
+    //   password: "hhhxxxhh",
+    // });
+    // debugger;
+    router.push("/home");
   } catch (error) {
     alert(error.message);
   }

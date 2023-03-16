@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+
 const list = ref([
     { imgUrl: "src/assets/Home/floor-1-b01.png", id: 0 },
     { imgUrl: "src/assets/Home/floor-1-b02.png", id: 1 },

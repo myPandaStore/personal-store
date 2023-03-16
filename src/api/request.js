@@ -21,8 +21,6 @@ requests.interceptors.request.use((config) => {
 
 //响应拦截器
 requests.interceptors.response.use((res) => {
-    //成功的回调
-    //进度条结束
     nprogress.done()
     return res.data
 }, (error) => {
