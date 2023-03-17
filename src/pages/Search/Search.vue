@@ -1,11 +1,12 @@
-<script setup lang="ts">
-import { ref, onBeforeMount, onMounted, watchEffect, computed } from "vue";
+<script setup>
+import { ref, onBeforeMount, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { searchStore } from "../../stores/search";
 
 const route = useRoute();
 const useSearchStore = searchStore();
-const keyword = route.params.keyword || "";
+let keyword = route.params.keyword;
+
 // 分页器当前页码数
 const currentPageNumber = ref(1);
 // 初始化向服务端发送请求的参数
@@ -13,29 +14,43 @@ const searchParams = ref({
   keyword: "",
   order: "",
 });
+// 初始化商品详情数据
+let good = ref({});
 
-const getData = () => {
-  useSearchStore.getSearchList(searchParams.value);
+const getData = async () => {
+  await useSearchStore.getSearchList(searchParams.value);
+  good.value = useSearchStore.searchList;
+  // debugger;
 };
-// 商品
-const good = useSearchStore.searchList;
 
 onBeforeMount(() => {
   Object.assign(searchParams.value, { keyword });
 });
 
 onMounted(() => {
-// 
-
   getData();
 });
 
-watchEffect(async () => {
-  searchParams.value.keyword = "";
-  searchParams.value.order = "";
-  Object.assign(searchParams.value, { keyword });
-  getData();
-});
+watch(
+  () => route.params,
+  async () => {
+    Object.assign(searchParams.value, { keyword });
+    // searchParams.value.keyword = "";
+    // debugger;
+    getData();
+  },
+  { immediate: true }
+);
+
+watch(
+  () => route.params,
+  (toParams, previousParams) => {
+    //  console.log(toParams.keyword)
+    //  console.log(previousParams.keyword)
+    keyword = toParams.keyword;
+    //  debugger
+  }
+);
 </script>
 <template>
   <TypeNav />
@@ -179,12 +194,7 @@ watchEffect(async () => {
       <div class="search_detail_list">
         <div class="search_detail_list_top">
           <div class="search_detail_list_top_item">
-            <!--在路由跳转时切记忘记带id(params参数)-->
-            <!-- <router-link :to="`/detail/${good.id}`">
-                                <img v-lazy="good.defaultImg" />
-                            </router-link> -->
-            <!--跳转到商品详情页： 并携带商品id-->
-            <router-link :to="`/detail/${good.id}`">
+            <router-link :to="`/detail/${good.title}`">
               <img src="@/assets/Search/mobile03.png" alt="测试图片" />
             </router-link>
 
@@ -369,8 +379,6 @@ watchEffect(async () => {
           :background="false"
           layout="total, prev, pager, next"
           :total="1000"
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
         />
         <!-- <div class="demonstration">Total item count</div> -->
       </div>

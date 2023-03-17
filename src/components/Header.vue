@@ -21,13 +21,10 @@ const router = useRouter();
 // 跳转到 search 页面
 const goSearch = () => {
   router.push({
-    // path: `/search/${keyWord.value}`,
     name: "Search",
     params: {
       keyword: keyWord.value,
     },
-    // path: '/search',
-    // query: {id:123}
   });
 };
 

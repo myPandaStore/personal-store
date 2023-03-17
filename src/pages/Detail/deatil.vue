@@ -1,7 +1,12 @@
-<script></script>
+<script setup lang="ts">
+import { useRoute } from 'vue-router';
+const route = useRoute()
+
+</script>
 <template>
-    <div>
-        这里是商品详情页 
+    <div class="detail">
+        <TypeNav />
+        
     </div>
 </template>
 <style></style>

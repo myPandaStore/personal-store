@@ -45,6 +45,7 @@ const routes = [{
         path: '/home',
         component: Home,
         name: 'Home',
+        
     },
     {
         path: '/search/:keyword',
