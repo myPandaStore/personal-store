@@ -74,3 +74,31 @@ export const getSearchInfo = (req, res) => {
     }
     res.send(result)
 }
+
+export const getCartList =(req, res) => {
+    let data = [
+        {"skuName": "小米",
+        "skuPrice": 1,
+        "skuNum":10,
+        "imgUrl": "http://127.0.0.1:3007/goods1.png"
+        },
+          {"skuName": "华为",
+        "skuPrice": 1,
+        "skuNum":10,
+        "imgUrl": "http://127.0.0.1:3007/goods1.png"
+        },
+          {"skuName": "苹果",
+        "skuPrice": 1,
+        "skuNum":10,
+        "imgUrl": "http://127.0.0.1:3007/goods1.png"
+        },
+          {"skuName": "红米米",
+        "skuPrice": 1,
+        "skuNum":10,
+        "imgUrl": "http://127.0.0.1:3007/goods1.png"
+        }
+    ]
+    
+    res.send(data)
+}
+

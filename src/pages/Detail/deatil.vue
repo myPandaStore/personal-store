@@ -6,7 +6,7 @@ const route = useRoute()
 <template>
     <div class="detail">
         <TypeNav />
-        
+        详情组件
     </div>
 </template>
 <style></style>

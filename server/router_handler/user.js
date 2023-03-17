@@ -425,3 +425,44 @@ export const getBaseCategoryLis = (req, res) => {
     ]
     res.send(data)
 }
+export const getBanner = (req, res) => {
+    let data = [{
+            "imgUrl": "http://127.0.0.1:3007/home/banner1.jpg",
+            "id": 0
+        },
+        {
+            "imgUrl": "http://127.0.0.1:3007/home/banner2.jpg",
+            "id": 1
+        },
+        {
+            "imgUrl": "http://127.0.0.1:3007/home/banner3.jpg",
+            "id": 2
+        },
+        {
+            "imgUrl": "http://127.0.0.1:3007/home/banner4.jpg",
+            "id": 3
+        },
+    ]
+    res.send(data)
+}
+
+export const getFloorBanner = (req, res) => {
+    let data = [{
+        "imgUrl": "http://127.0.0.1:3007/home/floor-1-b01.png",
+        "id": 0
+    },
+    {
+        "imgUrl": "http://127.0.0.1:3007/home/floor-1-b02.png",
+        "id": 1
+    },
+    {
+        "imgUrl": "http://127.0.0.1:3007/home/floor-1-b03.png",
+        "id": 2
+    },
+    {
+        "imgUrl": "http://127.0.0.1:3007/home/floor-1-b01.png",
+        "id": 3
+    },
+]
+res.send(data)
+}

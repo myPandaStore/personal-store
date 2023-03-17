@@ -194,7 +194,7 @@ watch(
       <div class="search_detail_list">
         <div class="search_detail_list_top">
           <div class="search_detail_list_top_item">
-            <router-link :to="`/detail/${good.title}`">
+            <router-link :to="`/shopcard/${good.title}`">
               <img src="@/assets/Search/mobile03.png" alt="测试图片" />
             </router-link>
 

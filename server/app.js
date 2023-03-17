@@ -12,6 +12,9 @@ import {
 
 const app = express()
 
+// 向外托管静态图片资源
+app.use(express.static("public"))
+
 app.use(cors())
 app.use(bodyParser.urlencoded({
   extended: false
@@ -23,6 +26,7 @@ app.use(express.urlencoded({
 
 app.use('/api', userRouter)
 app.use('/my', userinfoRouter)
+
 
 // 错误中间件
 app.use(function (err, req, res, next) {

@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import { ref } from "vue";
-const listContainerList = ref([
-  { imgUrl: "src/pages/Home/images/banner1.jpg", id: 0 },
-  { imgUrl: "src/pages/Home/images/banner2.jpg", id: 1 },
-  { imgUrl: "src/pages/Home/images/banner3.jpg", id: 2 },
-  { imgUrl: "src/pages/Home/images/banner4.jpg", id: 3 },
-]);
+import { ref, onMounted } from "vue";
+import { reqBanner } from "../../api/index";
+
+const listContainerList = ref([]);
+
+onMounted(async () => {
+  let res = await reqBanner();
+  // @ts-ignore
+  listContainerList.value = res
+});
 </script>
 <template>
   <div class="list_container">
@@ -104,7 +107,7 @@ const listContainerList = ref([
         </li>
       </ul>
       <div class="list_right_ads">
-        <img src="@/assets/ad1.png" alt="广告图片">
+        <img src="@/assets/ad1.png" alt="广告图片" />
       </div>
     </div>
   </div>
@@ -149,7 +152,7 @@ const listContainerList = ref([
         background-color: #e4e4e4;
       }
 
-      &>p:first-child {
+      & > p:first-child {
         font-size: 14px;
         line-height: 22px;
         font-weight: bold;
@@ -159,24 +162,24 @@ const listContainerList = ref([
       }
     }
 
-    &>ul {
+    & > ul {
       list-style: none;
       margin: 0;
       padding: 0 10px;
 
-      &>li {
+      & > li {
         display: flex;
         align-items: center;
         height: 30px;
 
-        &>p:first-child {
+        & > p:first-child {
           margin-left: 10px;
           font-weight: bold;
           font-style: normal;
           color: #333;
         }
 
-        &>p:nth-child(2) {
+        & > p:nth-child(2) {
           margin-right: 10px;
         }
       }
@@ -189,7 +192,7 @@ const listContainerList = ref([
     padding: 0;
     list-style: none;
 
-    &>li {
+    & > li {
       display: flex;
       justify-content: space-between;
       border: 1px solid #e4e4e4;
@@ -203,7 +206,7 @@ const listContainerList = ref([
         border-top: none;
       }
 
-      &>.list_right_servirces_item {
+      & > .list_right_servirces_item {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -214,7 +217,7 @@ const listContainerList = ref([
           border: none;
         }
 
-        &>i {
+        & > i {
           background-image: url(@/assets/icons.png);
           width: 61px;
           height: 40px;
@@ -222,7 +225,6 @@ const listContainerList = ref([
         }
       }
     }
-
   }
 
   &_ads {

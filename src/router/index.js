@@ -18,6 +18,7 @@ const Regist = () => import("@/pages/Regist/Regist.vue")
 const Login = () => import("@/pages/Login/Login.vue")
 const Home = () => import("@/pages/Home/Home.vue")
 const Search = () => import("@/pages/Search/Search.vue")
+const ShopCart = () => import("@/pages/ShopCart/ShopCart.vue")
 const Detail = () => import("@/pages/Detail/Deatil.vue")
 
 
@@ -51,6 +52,11 @@ const routes = [{
         path: '/search/:keyword',
         component: Search,
         name: 'Search',
+    },
+    {
+        path:'/shopcard/:title',
+        component: ShopCart,
+        name: 'ShopCart'
     },
     {
         path: '/detail/:id',

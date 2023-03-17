@@ -3,7 +3,9 @@ import {
     regUser,
     login,
     logout,
-    getBaseCategoryLis
+    getBaseCategoryLis,
+    getBanner,
+    getFloorBanner
 } from '../router_handler/user.js'
 import reg_login_schema from '../schema/user.js'
 import expressJoi from '@escook/express-joi'
@@ -22,6 +24,12 @@ router.post('/user/login', expressJoi(reg_login_schema), login)
 
 // 退出登录
 router.get('/user/logout', logout)
+
+// 首页轮播图
+router.get('/getBanner', getBanner)
+
+// 首页 floor banner
+router.get('/getFloorBanner', getFloorBanner)
 
 // 三级列表的数据
 router.get('/product/getBaseCategoryList', getBaseCategoryLis)

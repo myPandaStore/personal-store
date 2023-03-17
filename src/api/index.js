@@ -27,6 +27,17 @@ export const reqCategoryList = () => requests({
     method: 'get'
 })
 
+// 获取首页 banner
+export const reqBanner = () => requests({
+    url: 'api/getBanner',
+    method: 'get'
+})
+
+// 获取首页 floor banner
+export const reqFloorBanner = () => requests({
+    url: 'api/getFloorBanner'
+})
+
 // my 开头的接口路径均需要携带 Authorization 字段
 // 获取验证码
 export const reqGetVerifyCode = (phone) => requests({
@@ -57,4 +68,13 @@ export const reqGetSearchInfo = (params) => requests({
     url: "/my/list",
     method: "post",
     data: params
+})
+
+//获取购物车列表数据接口
+export const reqCartList = () => requests({
+    headers: {
+        Authorization: localStorage.getItem('TOKEN')
+    },
+    url: "/my/cartList",
+    method: 'get'
 })
