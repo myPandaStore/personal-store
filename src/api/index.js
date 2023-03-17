@@ -46,3 +46,15 @@ export const reqUserInfo = (data) => requests({
     data,
     method: 'get'
 })
+
+//获取搜索模块数据 地址：/api/list 请求方式：post 参数：需要带参数
+//当前函数需要接收外部传递参数
+//当前接口，给服务器传递一个默认参数【至少是一个空对象】
+export const reqGetSearchInfo = (params) => requests({
+    headers: {
+        Authorization: localStorage.getItem('TOKEN')
+    },
+    url: "/my/list",
+    method: "post",
+    data: params
+})

@@ -12,7 +12,6 @@ export const sendVerifyCode = (req, res) => {
 }
 
 // 发送用户信息的处理函数
-
 export const getUserInfo = (req, res) => {
     let {
         username
@@ -37,4 +36,41 @@ export const getUserInfo = (req, res) => {
         }
         res.send(results)
     })
+}
+
+// 搜索模块的数据处理函数
+export const getSearchInfo = (req, res) => {
+    let {
+        keyword,
+        order
+    } = req.body
+    // 根据 keyword 对数据进行检索
+    // 商品标题 商品价格
+    let result
+    let searchList = {
+        status: 0,
+        "小米": {
+            id: 0,
+            title: "小米",
+            price: 123
+
+        },
+        "华为": {
+            id: 1,
+            title: "华为",
+            price: 222
+
+        },
+        "苹果": {
+            id: 2,
+            title: "苹果",
+            price: 333
+
+        }
+    }
+
+    if (keyword) {
+        result = searchList[keyword]
+    }
+    res.send(result)
 }
