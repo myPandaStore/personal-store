@@ -1,80 +1,100 @@
 // 当前模块：API进行统一管理
-import requests from './request'
+import requests from "./request";
 
 // 注册
-export const reqUserResiter = (data) => requests({
+export const reqUserResiter = (data) =>
+  requests({
     url: `/api/user/register`,
     data,
-    method: 'post'
-})
+    method: "post",
+  });
 
 // 登录
-export const reqUserLogin = (data) => requests({
+export const reqUserLogin = (data) =>
+  requests({
     url: `/api/user/login`,
     data,
-    method: 'post'
-})
+    method: "post",
+  });
 
 //退出登录
-export const reqLogOut = () => requests({
+export const reqLogOut = () =>
+  requests({
     url: `api/user/logout`,
-    method: 'get'
-})
+    method: "get",
+  });
 
-//三级联动接口 
-export const reqCategoryList = () => requests({
-    url: 'api/product/getBaseCategoryList',
-    method: 'get'
-})
+//三级联动接口
+export const reqCategoryList = () =>
+  requests({
+    url: "api/product/getBaseCategoryList",
+    method: "get",
+  });
 
 // 获取首页 banner
-export const reqBanner = () => requests({
-    url: 'api/getBanner',
-    method: 'get'
-})
+export const reqBanner = () =>
+  requests({
+    url: "api/getBanner",
+    method: "get",
+  });
 
 // 获取首页 floor banner
-export const reqFloorBanner = () => requests({
-    url: 'api/getFloorBanner'
-})
+export const reqFloorBanner = () =>
+  requests({
+    url: "api/getFloorBanner",
+  });
 
 // my 开头的接口路径均需要携带 Authorization 字段
 // 获取验证码
-export const reqGetVerifyCode = (phone) => requests({
+export const reqGetVerifyCode = (phone) =>
+  requests({
     headers: {
-        Authorization: localStorage.getItem('TOKEN')
+      Authorization: localStorage.getItem("TOKEN"),
     },
     url: `/my/sendCode/${phone}`,
-    method: "post"
-})
+    method: "post",
+  });
 
 // 获取用户信息
-export const reqUserInfo = (data) => requests({
+export const reqUserInfo = (data) =>
+  requests({
     headers: {
-        Authorization: localStorage.getItem('TOKEN')
+      Authorization: localStorage.getItem("TOKEN"),
     },
     url: `/my/getUserInfo`,
     data,
-    method: 'get'
-})
+    method: "get",
+  });
 
 //获取搜索模块数据 地址：/api/list 请求方式：post 参数：需要带参数
 //当前函数需要接收外部传递参数
 //当前接口，给服务器传递一个默认参数【至少是一个空对象】
-export const reqGetSearchInfo = (params) => requests({
+export const reqGetSearchInfo = (params) =>
+  requests({
     headers: {
-        Authorization: localStorage.getItem('TOKEN')
+      Authorization: localStorage.getItem("TOKEN"),
     },
     url: "/my/list",
     method: "post",
-    data: params
-})
+    data: params,
+  });
 
 //获取购物车列表数据接口
-export const reqCartList = () => requests({
+export const reqCartList = () =>
+  requests({
     headers: {
-        Authorization: localStorage.getItem('TOKEN')
+      Authorization: localStorage.getItem("TOKEN"),
     },
     url: "/my/cartList",
-    method: 'get'
-})
+    method: "get",
+  });
+
+//修改商品的选中状态
+export const reqUpdateCheckedByid = (skuName, ischecked) =>
+  requests({
+    headers: {
+      Authorization: localStorage.getItem("TOKEN"),
+    },
+    url: `/my/cartList/checkCart/${skuName}/${ischecked}`,
+    method: "get",
+  });

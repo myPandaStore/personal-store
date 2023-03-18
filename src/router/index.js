@@ -46,17 +46,26 @@ const routes = [{
         path: '/home',
         component: Home,
         name: 'Home',
+        meta: {
+            show: true
+        }
         
     },
     {
         path: '/search/:keyword',
         component: Search,
         name: 'Search',
+        meta: {
+            show: true
+        }
     },
     {
         path:'/shopcard/:title',
         component: ShopCart,
-        name: 'ShopCart'
+        name: 'ShopCart',
+        meta: {
+            show: true
+        }
     },
     {
         path: '/detail/:id',

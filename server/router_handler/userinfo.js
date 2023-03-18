@@ -1,104 +1,114 @@
-import db from "../db/index.js"
+import db from "../db/index.js";
 
 // 发送验证码的处理函数
 export const sendVerifyCode = (req, res) => {
-    let result = []
-    let arr = req.params.phoneNumber.split('')
-    while (result.length < 4) {
-        const randomIndex = Math.floor(Math.random() * arr.length)
-        result.push(arr[randomIndex] * 3 % 5)
-    }
-    res.send(result.join(''))
-}
+  let result = [];
+  let arr = req.params.phoneNumber.split("");
+  while (result.length < 4) {
+    const randomIndex = Math.floor(Math.random() * arr.length);
+    result.push((arr[randomIndex] * 3) % 5);
+  }
+  res.send(result.join(""));
+};
 
 // 发送用户信息的处理函数
 export const getUserInfo = (req, res) => {
-    let {
-        username
-    } = req.body
+  let { username } = req.body;
 
-    // 2.根据用户名查询用户的数据
-    const sql = `select * from ev_users where username=?`
-    db.query(sql, username, function (err, results) {
-        // 执行 SQL 语句失败
-        if (err) {
-            return res.send({
-                status: 1,
-                message: err.message
-            })
-        }
-        // 执行 SQL 语句成功，但是查询到数据条数不等于 1
-        if (results.length !== 1) {
-            return res.send({
-                status: 1,
-                message: '登录失败'
-            })
-        }
-        res.send(results)
-    })
-}
+  // 2.根据用户名查询用户的数据
+  const sql = `select * from ev_users where username=?`;
+  db.query(sql, username, function (err, results) {
+    // 执行 SQL 语句失败
+    if (err) {
+      return res.send({
+        status: 1,
+        message: err.message,
+      });
+    }
+    // 执行 SQL 语句成功，但是查询到数据条数不等于 1
+    if (results.length !== 1) {
+      return res.send({
+        status: 1,
+        message: "登录失败",
+      });
+    }
+    res.send(results);
+  });
+};
 
 // 搜索模块的数据处理函数
 export const getSearchInfo = (req, res) => {
-    let {
-        keyword,
-        order
-    } = req.body
-    // 根据 keyword 对数据进行检索
-    // 商品标题 商品价格
-    let result
-    let searchList = {
-        status: 0,
-        "小米": {
-            id: 0,
-            title: "小米",
-            price: 123
+  let { keyword, order } = req.body;
+  // 根据 keyword 对数据进行检索
+  // 商品标题 商品价格
+  let result;
+  let searchList = {
+    status: 0,
+    小米: {
+      id: 0,
+      title: "小米",
+      price: 123,
+    },
+    华为: {
+      id: 1,
+      title: "华为",
+      price: 222,
+    },
+    苹果: {
+      id: 2,
+      title: "苹果",
+      price: 333,
+    },
+  };
 
-        },
-        "华为": {
-            id: 1,
-            title: "华为",
-            price: 222
+  if (keyword) {
+    result = searchList[keyword];
+  }
+  res.send(result);
+};
 
-        },
-        "苹果": {
-            id: 2,
-            title: "苹果",
-            price: 333
+let cartList = [
+  {
+    skuName: "小米",
+    skuPrice: 1,
+    skuNum: 10,
+    imgUrl: "http://127.0.0.1:3007/goods1.png",
+    isChecked: 0,
+  },
+  {
+    skuName: "华为",
+    skuPrice: 1,
+    skuNum: 10,
+    imgUrl: "http://127.0.0.1:3007/goods1.png",
+    isChecked: 0,
+  },
+  {
+    skuName: "苹果",
+    skuPrice: 1,
+    skuNum: 10,
+    imgUrl: "http://127.0.0.1:3007/goods1.png",
+    isChecked: 0,
+  },
+  {
+    skuName: "红米米",
+    skuPrice: 1,
+    skuNum: 10,
+    imgUrl: "http://127.0.0.1:3007/goods1.png",
+    isChecked: 0,
+  },
+];
+export const getCartList = (req, res) => {
+  res.send(cartList);
+};
 
-        }
+export const checkCart = (req, res) => {
+  let { skuName, isChecked } = req.params;
+  for (let i = 0; i < cartList.length; i++) {
+    if (cartList[i].skuName === skuName) {
+      cartList[i].isChecked = isChecked;
     }
-
-    if (keyword) {
-        result = searchList[keyword]
-    }
-    res.send(result)
-}
-
-export const getCartList =(req, res) => {
-    let data = [
-        {"skuName": "小米",
-        "skuPrice": 1,
-        "skuNum":10,
-        "imgUrl": "http://127.0.0.1:3007/goods1.png"
-        },
-          {"skuName": "华为",
-        "skuPrice": 1,
-        "skuNum":10,
-        "imgUrl": "http://127.0.0.1:3007/goods1.png"
-        },
-          {"skuName": "苹果",
-        "skuPrice": 1,
-        "skuNum":10,
-        "imgUrl": "http://127.0.0.1:3007/goods1.png"
-        },
-          {"skuName": "红米米",
-        "skuPrice": 1,
-        "skuNum":10,
-        "imgUrl": "http://127.0.0.1:3007/goods1.png"
-        }
-    ]
-    
-    res.send(data)
-}
-
+  }
+  console.log(cartList);
+  console.log(skuName, isChecked);
+  res.send(cartList);
+};

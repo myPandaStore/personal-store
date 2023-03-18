@@ -1,14 +1,35 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import { reqCartList } from "../../api/index";
+import { ref, onMounted, onBeforeMount } from "vue";
+import { shopCartStore } from "../../stores/shopCart"
+// import { reqUpdateCheckedByid, reqCartList } from '../../api'
 
 // 初始化购物车数据
 const cartInfoList = ref([])
 
-onMounted( async() => {
-   let res = await reqCartList()
-   cartInfoList.value = res
+const useShopCartStore = shopCartStore()
+
+onBeforeMount(() => {
+  getData()
 })
+
+const getData = async () => {
+  await useShopCartStore.getCartList()
+  cartInfoList.value = useShopCartStore.cartList
+}
+
+
+//修改某个产品的勾选状态
+const updateChecked = async (cart, event) => {
+  try {
+    //如果修改数据成功，再次获取服务器数据（购物车）
+    let isChecked = event.target.checked ? "1" : "0";
+    useShopCartStore.updateCheckedById(cart.skuName, isChecked)
+    getData();
+  } catch (error) {
+    //如果失败提示
+    alert(error.message);
+  }
+}
 </script>
 <template>
   <div class="cart">
@@ -25,12 +46,7 @@ onMounted( async() => {
       <div class="cart-body">
         <ul class="cart-list" v-for="cart in cartInfoList" :key="cart.id">
           <li class="cart-list-con1">
-            <input
-              type="checkbox"
-              name="chk_list"
-              :checked="cart.isChecked == 1"
-              @change="updateChecked(cart, $event)"
-            />
+            <input type="checkbox" name="chk_list" :checked="cart.isChecked == 1" @change="updateChecked(cart, $event)" />
           </li>
           <li class="cart-list-con2">
             <img :src="cart.imgUrl" />
@@ -41,20 +57,10 @@ onMounted( async() => {
             <span class="price">{{ cart.skuPrice }}</span>
           </li>
           <li class="cart-list-con5">
-            <a href="javascript:void(0)" class="mins" @click="handler('minus', -1, cart)"
-              >-</a
-            >
-            <input
-              autocomplete="off"
-              type="text"
-              :value="cart.skuNum"
-              minnum="1"
-              class="itxt"
-              @change="handler('change', $event.target.value, cart)"
-            />
-            <a href="javascript:void(0)" class="plus" @click="handler('add', +1, cart)"
-              >+</a
-            >
+            <a href="javascript:void(0)" class="mins" @click="handler('minus', -1, cart)">-</a>
+            <input autocomplete="off" type="text" :value="cart.skuNum" minnum="1" class="itxt"
+              @change="handler('change', $event.target.value, cart)" />
+            <a href="javascript:void(0)" class="plus" @click="handler('add', +1, cart)">+</a>
           </li>
           <li class="cart-list-con6">
             <span class="sum">{{ cart.skuNum * cart.skuPrice }}</span>
@@ -96,6 +102,10 @@ onMounted( async() => {
   width: 1200px;
   margin: 0 auto;
 
+  ul {
+    list-style: none;
+  }
+
   h4 {
     margin: 9px 0;
     font-size: 14px;
@@ -109,7 +119,7 @@ onMounted( async() => {
       padding: 10px;
       overflow: hidden;
 
-      & > div {
+      &>div {
         float: left;
       }
 
@@ -146,7 +156,7 @@ onMounted( async() => {
         border-bottom: 1px solid #ddd;
         overflow: hidden;
 
-        & > li {
+        &>li {
           float: left;
         }
 
