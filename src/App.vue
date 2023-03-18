@@ -18,11 +18,11 @@ onMounted(() => {
 </template>
 
 <style>
-body {
+/* body {
   font: 12px/1.3 "Microsoft YaHei", Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
   color: #333;
   margin: 0;
   padding: 0;
   min-width: 1380px;
-}
+} */
 </style>
