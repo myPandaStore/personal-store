@@ -67,7 +67,7 @@ export const getSearchInfo = (req, res) => {
   res.send(result);
 };
 
-// 初始化 cartList 
+// 初始化 cartList
 let cartList = [
   {
     skuName: "小米",
@@ -131,5 +131,11 @@ export const addToCart = (req, res) => {
       }
     }
   }
+  res.send(cartList);
+};
+
+export const deleteCart = (req, res) => {
+  let { skuName } = req.params;
+  cartList = cartList.filter((item) => item.skuName !== skuName);
   res.send(cartList);
 };

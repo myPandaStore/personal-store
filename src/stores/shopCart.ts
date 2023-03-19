@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { reqUpdateCheckedByid, reqCartList, reqAddOrUpdateShopCart } from '../api'
+import { reqUpdateCheckedByid, reqCartList, reqAddOrUpdateShopCart, reqDeleteCartBySkuName } from '../api'
 export const shopCartStore = defineStore('shopCart', {
     state: () => {
         return {
@@ -23,5 +23,9 @@ export const shopCartStore = defineStore('shopCart', {
         async addOrUpdateShopCart(skuName, skuNum) {
             await reqAddOrUpdateShopCart(skuName, skuNum);
         },
+        // 删除购物车某一个产品
+        async deleteCartBySkuName(skuName) {
+            await reqDeleteCartBySkuName(skuName)
+        }
     }
 })

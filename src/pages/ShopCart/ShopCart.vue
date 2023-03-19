@@ -50,7 +50,7 @@ const handler = throttle(async (type, disNum, cart) => {
       if (isNaN(disNum) || disNum < 1) {
         disNum = 0;
       } else {
-        disNum = parseInt(disNum) - cart.skuNum
+        disNum = parseInt(disNum)
       }
       break;
   }
@@ -63,6 +63,17 @@ const handler = throttle(async (type, disNum, cart) => {
     console.log(error.message)
   }
 }, 500)
+
+// 删除某一个产品的操作
+const deleteCartBySkuName = async(cart) => {
+  try {
+    // 删除成功再次发请求获取新的数据进行展示
+    await useShopCartStore.deleteCartBySkuName(cart.skuName)
+    getData()
+  } catch (error) {
+    alert(error.message)
+  }
+}
 </script>
 <template>
   <div class="cart">
@@ -99,7 +110,7 @@ const handler = throttle(async (type, disNum, cart) => {
             <span class="sum">{{ cart.skuNum * cart.skuPrice }}</span>
           </li>
           <li class="cart-list-con7">
-            <a class="sindelet" @click="deleteCartById(cart)">删除</a>
+            <a class="sindelet" @click="deleteCartBySkuName(cart)">删除</a>
             <br />
             <a href="#none">移到收藏</a>
           </li>
@@ -264,6 +275,7 @@ const handler = throttle(async (type, disNum, cart) => {
 
           a {
             color: #666;
+            cursor: pointer;
           }
         }
       }

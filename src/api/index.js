@@ -108,3 +108,13 @@ export const reqAddOrUpdateShopCart = (skuName, skuNum) =>
     url: `/my/cartList/addToCart/${skuName}/${skuNum}`,
     method: "post",
   });
+
+//删除购物产品的接口
+export const reqDeleteCartBySkuName = (skuName) =>
+  requests({
+    headers: {
+      Authorization: localStorage.getItem("TOKEN"),
+    },
+    url: `/my/cartList/deleteCart/${skuName}`,
+    method: "post",
+  });
