@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onBeforeMount } from "vue";
+import { ref, onMounted, onBeforeMount, computed, nextTick } from "vue";
 import { shopCartStore } from "../../stores/shopCart"
 import { throttle } from "../../utils/tool";
 
@@ -7,8 +7,7 @@ import { throttle } from "../../utils/tool";
 const cartInfoList = ref([])
 
 const useShopCartStore = shopCartStore()
-
-onBeforeMount(() => {
+onMounted(() => {
   getData()
 })
 
@@ -28,6 +27,17 @@ const updateChecked = async (cart, event) => {
   } catch (error) {
     //如果失败提示
     alert(error.message);
+  }
+}
+
+// 修改全部产品的勾选状态
+const updateAllCartChecked = async (event) => {
+  try {
+    let isChecked = event.target.checked ? "1" : "0"
+    await useShopCartStore.updateAllCartIsChecked(isChecked)
+    getData()
+  } catch (error) {
+    alert(error.message)
   }
 }
 
@@ -65,7 +75,7 @@ const handler = throttle(async (type, disNum, cart) => {
 }, 500)
 
 // 删除某一个产品的操作
-const deleteCartBySkuName = async(cart) => {
+const deleteCartBySkuName = async (cart) => {
   try {
     // 删除成功再次发请求获取新的数据进行展示
     await useShopCartStore.deleteCartBySkuName(cart.skuName)
@@ -74,6 +84,27 @@ const deleteCartBySkuName = async(cart) => {
     alert(error.message)
   }
 }
+
+// 判断是否全选
+const isAllCheck = computed(() => {
+  return cartInfoList.value.every((item) => item.isChecked == 1)
+})
+
+// 删除全部选中的产品
+const deleteAllCheckedCart = async () => {
+  await useShopCartStore.deleteAllCheckedCart()
+  getData()
+}
+
+// 计算购买商品的总价
+const totalPrice = computed(() => {
+  let sum = 0
+  cartInfoList.value.forEach((item) => {
+    sum += item.skuNum * item.skuPrice
+  })
+  return sum
+})
+
 </script>
 <template>
   <div class="cart">
@@ -119,7 +150,8 @@ const deleteCartBySkuName = async(cart) => {
     </div>
     <div class="cart-tool">
       <div class="select-all">
-        <input class="chooseAll" type="checkbox" :checked="isAllCheck" />
+        <input class="chooseAll" type="checkbox" :checked="isAllCheck && cartInfoList.length > 0"
+          @change="updateAllCartChecked" />
         <span>全选</span>
       </div>
       <div class="option">
@@ -134,7 +166,7 @@ const deleteCartBySkuName = async(cart) => {
           <i class="summoney">{{ totalPrice }}</i>
         </div>
         <div class="sumbtn">
-          <a class="sum-btn" @click="$router.push('/trade')">结算</a>
+          <router-link class="sum-btn" to="/trade">结算</router-link>
         </div>
       </div>
     </div>
@@ -309,6 +341,7 @@ const deleteCartBySkuName = async(cart) => {
         float: left;
         padding: 0 10px;
         color: #666;
+        cursor: pointer;
       }
     }
 
