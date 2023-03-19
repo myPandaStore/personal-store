@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { reqUpdateCheckedByid, reqCartList } from '../api'
+import { reqUpdateCheckedByid, reqCartList, reqAddOrUpdateShopCart } from '../api'
 export const shopCartStore = defineStore('shopCart', {
     state: () => {
         return {
@@ -18,6 +18,10 @@ export const shopCartStore = defineStore('shopCart', {
         async updateCheckedById(skuName, isChecked) {
             let result = await reqUpdateCheckedByid(skuName, isChecked);
             this.cartList = result
+        },
+        //加入购物车的||修改某一个产品的个数
+        async addOrUpdateShopCart(skuName, skuNum) {
+            await reqAddOrUpdateShopCart(skuName, skuNum);
         },
     }
 })

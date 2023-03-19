@@ -67,32 +67,33 @@ export const getSearchInfo = (req, res) => {
   res.send(result);
 };
 
+// 初始化 cartList 
 let cartList = [
   {
     skuName: "小米",
-    skuPrice: 1,
-    skuNum: 10,
+    skuPrice: 1111,
+    skuNum: 1000,
     imgUrl: "http://127.0.0.1:3007/goods1.png",
     isChecked: 0,
   },
   {
     skuName: "华为",
-    skuPrice: 1,
-    skuNum: 10,
+    skuPrice: 4444,
+    skuNum: 1000,
     imgUrl: "http://127.0.0.1:3007/goods1.png",
     isChecked: 0,
   },
   {
     skuName: "苹果",
-    skuPrice: 1,
-    skuNum: 10,
+    skuPrice: 3333,
+    skuNum: 1000,
     imgUrl: "http://127.0.0.1:3007/goods1.png",
     isChecked: 0,
   },
   {
     skuName: "红米米",
-    skuPrice: 1,
-    skuNum: 10,
+    skuPrice: 2222,
+    skuNum: 1000,
     imgUrl: "http://127.0.0.1:3007/goods1.png",
     isChecked: 0,
   },
@@ -108,7 +109,27 @@ export const checkCart = (req, res) => {
       cartList[i].isChecked = isChecked;
     }
   }
-  console.log(cartList);
-  console.log(skuName, isChecked);
+  res.send(cartList);
+};
+
+export const addToCart = (req, res) => {
+  let { skuName, skuNum } = req.params;
+  for (let i = 0; i < cartList.length; i++) {
+    if (cartList[i].skuName === skuName) {
+      switch (skuNum) {
+        case "1":
+          cartList[i].skuNum += 1;
+          break;
+        case "-1":
+          cartList[i].skuNum -= 1;
+          break;
+        case "0":
+          cartList[i].skuNum = cartList[i].skuNum;
+          break;
+        default:
+          cartList[i].skuNum = Number(skuNum);
+      }
+    }
+  }
   res.send(cartList);
 };

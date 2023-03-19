@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, onBeforeMount } from "vue";
 import { shopCartStore } from "../../stores/shopCart"
-// import { reqUpdateCheckedByid, reqCartList } from '../../api'
+import { throttle } from "../../utils/tool";
 
 // 初始化购物车数据
 const cartInfoList = ref([])
@@ -30,6 +30,39 @@ const updateChecked = async (cart, event) => {
     alert(error.message);
   }
 }
+
+// 修改某个产品的个数
+const handler = throttle(async (type, disNum, cart) => {
+  // type: add minus change
+  // disNum: +变化量（+1） -变化量（-1） input最终应该显示的数量
+  // cart: 不同的产品
+  switch (type) {
+    case "add":
+      disNum = 1;
+      break;
+    case "minus":
+      // 产品的个数大于1，才可以执行 -1 逻辑
+      // 如果出现了产品的个数小于等于1，给服务器传递参数为0
+      disNum = cart.skuNum > 1 ? -1 : 0;
+      break;
+    case "change":
+      // 用户直接输入的最终量，如果非法的（带有汉字|出现负数），带给服务器0
+      if (isNaN(disNum) || disNum < 1) {
+        disNum = 0;
+      } else {
+        disNum = parseInt(disNum) - cart.skuNum
+      }
+      break;
+  }
+
+  // 发送请求，获取修改后的数据
+  try {
+    await useShopCartStore.addOrUpdateShopCart(cart.skuName, disNum)
+    getData();
+  } catch (error) {
+    console.log(error.message)
+  }
+}, 500)
 </script>
 <template>
   <div class="cart">

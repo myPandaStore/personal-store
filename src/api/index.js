@@ -98,3 +98,13 @@ export const reqUpdateCheckedByid = (skuName, ischecked) =>
     url: `/my/cartList/checkCart/${skuName}/${ischecked}`,
     method: "get",
   });
+
+//将产品添加到购物车中（获取更新某一个产品的个数）
+export const reqAddOrUpdateShopCart = (skuName, skuNum) =>
+  requests({
+    headers: {
+      Authorization: localStorage.getItem("TOKEN"),
+    },
+    url: `/my/cartList/addToCart/${skuName}/${skuNum}`,
+    method: "post",
+  });
