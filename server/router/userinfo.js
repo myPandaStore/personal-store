@@ -9,7 +9,9 @@ import {
   deleteCart,
   getUserAddress,
   getOrderInfo,
-  submitOrder
+  submitOrder,
+  getPayInfo,
+  getStatus
 } from "../router_handler/userinfo.js";
 
 const router = express.Router();
@@ -37,13 +39,19 @@ router.post("/cartList/addToCart/:skuName/:skuNum", addToCart);
 router.post("/cartList/deleteCart/:skuName", deleteCart);
 
 // 用户地址信息
-router.get('/userAddress', getUserAddress)
+router.get("/userAddress", getUserAddress);
 
 // 用户订单信息
-router.get('/orderInfo', getOrderInfo)
+router.get("/orderInfo", getOrderInfo);
 
 // 提交订单
-router.post('/submitOrder', submitOrder)
+router.post("/submitOrder", submitOrder);
+
+// 支付信息
+router.get("/pay/:orderId", getPayInfo);
+
+// 支付状态
+router.get("/pay/status/:orderId", getStatus)
 
 // 将路由对象共享出去
 export default router;

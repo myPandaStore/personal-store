@@ -197,9 +197,28 @@ export const getOrderInfo = (req, res) => {
 };
 
 export const submitOrder = (req, res) => {
-  let orderId = Math.floor(Math.random() * 9)
+  let orderId = Math.floor(Math.random() * 9);
   res.send({
     code: 200,
     tradNo: orderId,
   });
+};
+
+export const getPayInfo = (req, res) => {
+  let data = {
+    code: 200,
+    data: {
+      totalFee: 9999,
+      codeUrl: "http://127.0.0.1:3007/trade/goods.png",
+    },
+  };
+  res.send(data);
+};
+
+export const getStatus = (req, res) => {
+  let result = {
+    code: 200,
+
+  }
+  res.send(result);
 };

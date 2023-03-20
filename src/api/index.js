@@ -149,3 +149,23 @@ export const reqSubmitOrder = (tradeNo, data) =>
     data,
     method: "post",
   });
+
+//获取支付信息
+export const reqPayInfo = (orderId) =>
+  requests({
+    headers: {
+      Authorization: localStorage.getItem("TOKEN"),
+    },
+    url: `/my/pay/${orderId}`,
+    method: "get",
+  });
+
+//获取支付订单状态
+export const reqPayStatus = (orderId) =>
+  requests({
+    headers: {
+      Authorization: localStorage.getItem("TOKEN"),
+    },
+    url: `/my/pay/status/${orderId}`,
+    method: "get",
+  });
