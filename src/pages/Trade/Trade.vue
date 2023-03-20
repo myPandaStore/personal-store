@@ -104,8 +104,57 @@ const changeDefault = (address, addressInfo) => {
                     </div>
                 </div>
             </div>
+            <div class="trade_main_message">
+                <div class="trade_main_message_top">
+                    买家留言
+                </div>
+                <div class="trade_main_message_bottom">
+                    建议留言前先与商家沟通确认
+                </div>
+            </div>
+            <div class="trade_main_bill">
+                <div class="trade_main_bill_top">发票信息</div>
+                <div class="trade_main_bill_middle">普通发票（电子）个人明细</div>
+                <div class="trade_main_bill_bottom">使用优惠/抵用</div>
+            </div>
         </div>
-        <div class="trade_bottom"></div>
+        <div class="trade_bottom">
+            <div class="trade_bottom_top">
+                <div class="trade_bottom_top_first">
+                    <p>1件商品，总商品金额</p>
+                    <p>¥5399.00</p>
+                </div>
+                <div class="trade_bottom_top_second">
+                    <p>返现：</p>
+                    <p>0.00</p>
+                </div>
+                <div class="trade_bottom_top_third">
+                    <p>运费：</p>
+                    <p>0.00</p>
+                </div>
+            </div>
+            <div class="trade_bottom_mid">
+                <div class="trade_bottom_mid_top">
+                    <p>应付金额:　</p>
+                    <p>¥5399.00</p>
+                </div>
+                <div class="trade_bottom_mid_bottom">
+                    <p>
+                        寄送至:
+                    </p>
+                    <p>北京市昌平区宏福科技园综合楼6层</p>
+                    <p>
+                        收货人：</p>
+                    <p>张三</p>
+                    <p>15010658793</p>
+                </div>
+            </div>
+            <div class="trade_bottom_submit">
+                <div class="container">
+                    <a href="###">提交订单</a>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
   
@@ -222,8 +271,6 @@ const changeDefault = (address, addressInfo) => {
         &_order {
             margin-top: 20px;
 
-
-
             &_top {
                 font-size: 14px;
                 line-height: 21px;
@@ -293,6 +340,133 @@ const changeDefault = (address, addressInfo) => {
                 }
 
             }
+
+
+        }
+
+        &_message {
+            margin-top: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e1e1e1;
+
+            &_top {
+                font-size: 14px;
+                line-height: 21px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+            &_bottom {
+                border: 1px solid #e1e1e1;
+                padding-bottom: 60px;
+            }
+        }
+
+        &_bill {
+            margin-top: 20px;
+
+            &_top {
+                font-size: 14px;
+                line-height: 21px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+            &_middle {
+                margin-left: 20px;
+            }
+
+            &_bottom {
+                font-size: 14px;
+                line-height: 21px;
+                font-weight: bold;
+                margin-top: 10px;
+            }
+        }
+    }
+
+    &_bottom {
+        margin-top: 20px;
+
+        &_top {
+            text-align: end;
+            display: flex;
+            flex-direction: column;
+
+            &_first {
+                display: flex;
+                justify-content: flex-end;
+
+                &>p:first-child {
+                    margin-right: 60px;
+                }
+            }
+
+            &_second {
+                display: flex;
+                justify-content: flex-end;
+
+                &>p:first-child {
+                    margin-right: 164px;
+                }
+            }
+
+            &_third {
+                display: flex;
+                justify-content: flex-end;
+
+                &>p:first-child {
+                    margin-right: 164px;
+                }
+            }
+        }
+
+        &_mid {
+            margin-top: 20px;
+            background: #f1f1f1;
+            border: 1px solid #e1e1e1;
+            padding-right: 20px;
+
+            &_top {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+
+                &>p:nth-child(2) {
+                    color: red;
+                    font-size: 14px;
+                    font-weight: bold;
+                }
+            }
+
+            &_bottom {
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+
+        &_submit {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+
+            .container {
+                width: 164px;
+                height: 56px;
+                line-height: 56px;
+                margin-top: 20px;
+                text-align: center;
+                background-color: rgb(225, 37, 27);
+
+                a {
+                    text-decoration: none;
+                    color: white;
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+            }
+
+
 
         }
     }
