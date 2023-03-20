@@ -20,6 +20,7 @@ const Home = () => import("@/pages/Home/Home.vue");
 const Search = () => import("@/pages/Search/Search.vue");
 const ShopCart = () => import("@/pages/ShopCart/ShopCart.vue");
 const Trade = () => import("@/pages/Trade/Trade.vue");
+const Pay = () => import("@/pages/Pay/Pay.vue");
 const Detail = () => import("@/pages/Detail/Deatil.vue");
 
 const routes = [
@@ -71,6 +72,14 @@ const routes = [
     path: "/trade",
     component: Trade,
     name: "Trade",
+    meta: {
+      show: true,
+    },
+  },
+  {
+    path: "/pay",
+    component: Pay,
+    name: "Pay",
     meta: {
       show: true,
     },

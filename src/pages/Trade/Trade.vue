@@ -1,51 +1,89 @@
 <script setup lang="ts">
-import { ref } from "vue"
+import { ref, onMounted, computed, onBeforeMount } from "vue"
+import {useRouter} from "vue-router"
+import { tradeStore } from "../../stores/trade"
+import { reqSubmitOrder } from "../../api"
 
 // 初始化用户收货地址信息
-const addressInfo = ref([
-    {
-        "id": 0,
-        "isDefault": "1",
-        "consignee": "hhh",
-        "fullAddress": "===",
-        "phoneNum": "111"
-    },
-    {
-        "id": 0,
-        "isDefault": "1",
-        "consignee": "hhh",
-        "fullAddress": "===",
-        "phoneNum": "111"
-    },
-    {
-        "id": 0,
-        "isDefault": "1",
-        "consignee": "hhh",
-        "fullAddress": "===",
-        "phoneNum": "111"
-    }
-])
+const useTradeStore = tradeStore()
+const addressInfo = computed(() => {
+    return useTradeStore.address
+})
+onBeforeMount(() => {
+    useTradeStore.getUserAddress()
+    useTradeStore.getUserOrderInfo()
+})
 
 // 初始化订单
-const orderInfo = ref({
-    "skuId": "0",
-    "detailArrayList": {
-        "imgUrl": "111",
-        "skuName": "111",
-        "orderPrice": 123,
-        "skuNum": 1111
+const orderInfo = computed(() => {
+    return useTradeStore.orderInfo
+})
 
-    }
-
-}
-)
+// 初始化订单号
+const orderId = ref("")
 
 // 初始化留言信息
 const msg = ref("")
 
 // 改变默认收货地址
 const changeDefault = (address, addressInfo) => {
+    addressInfo.forEach((item) => (item.isDefault = 0))
+    address.isDefault = 1
+}
 
+const totalNum = computed(() => {
+    let sum = 0
+    orderInfo.value?.detailArrayList?.forEach((item) => {
+        sum += item.skuNum
+    })
+    return sum
+})
+
+const totalPrice = computed(() => {
+    let sum = 0
+    orderInfo.value?.detailArrayList?.forEach((item) => {
+        sum += item.skuNum * item.orderPrice
+    })
+    return sum
+})
+
+// 商品订单提交的最终地址
+const userDefaultAddress = computed(() => {
+    let res = addressInfo?.value?.find((item) => item.isDefault == 1)
+    if (res === undefined) {
+        return
+    }
+    let address = res?.fullAddress
+    return address
+})
+
+const router = useRouter()
+// 提交订单
+const submitOrder = async() => {
+    // 订单交易编码
+    let { orderId: tradeNo } = orderInfo.value
+    let defaultAddress = addressInfo?.value?.find((item) => item.isDefault == 1)
+    // console.log(defaultAddress)
+    // debugger
+    let data = {
+        username: defaultAddress?.username, // 收件人姓名
+        phoneNum: defaultAddress?.phoneNum, // 收件人联系电话
+        address: defaultAddress?.fullAddress, // 收件人地址
+        payWay: "ONLINE", // 支付方式
+        orderComment: msg.value, // 买家的留言信息
+        orderDetailList: orderInfo?.value?.detailArrayList // 商品清单
+    }
+    try {// 提交订单成功
+        let result = await reqSubmitOrder(tradeNo,data)
+        if (result?.code == 200) {
+            orderId.value = result?.tradNo
+            router.push('/pay?orderId=' + orderId.value)
+        }
+    } catch (error) {
+        alert(error.message)
+    }
+    // console.log(data)
+    // debugger
 }
 </script>
 
@@ -60,13 +98,16 @@ const changeDefault = (address, addressInfo) => {
                     收件人信息
                 </div>
                 <!---后续在此处便利数据v-for-->
-                <div class="trade_main_people_main">
-                    <div class="trade_main_people_main_left">张三</div>
-                    <div class="trade_main_people_main_middle">
-                        <p> 北京市昌平区宏福科技园综合楼6层 </p>
-                        <p>15010658793</p>
+                <div class="trade_main_people_main" v-for="(address) in addressInfo" :key="address.id">
+                    <div class="trade_main_people_main_left" :class="{ selected: address.isDefault == 1 }">
+                        {{ address.username }}
                     </div>
-                    <div class="trade_main_people_main_right">默认地址</div>
+                    <div class="trade_main_people_main_middle" @click="changeDefault(address, addressInfo)">
+                        <p> {{ address.fullAddress }}</p>
+                        <p>{{ address.phoneNum }}</p>
+                    </div>
+                    <div class="trade_main_people_main_right" :style="{ opacity: address.isDefault == 1 }"> {{
+                        address.isDefault == 1 ? '默认地址' : '可选地址' }}</div>
                 </div>
             </div>
             <div class="trade_main_pay">
@@ -89,17 +130,17 @@ const changeDefault = (address, addressInfo) => {
                 </div>
                 <div class="trade_main_order_good">
                     <div class="trade_main_order_good_top">商品清单</div>
-                    <div class="trade_main_order_good_main">
+                    <div class="trade_main_order_good_main" v-for="(order) in orderInfo.detailArrayList" :key="order.skuId">
                         <div class="trade_main_order_good_main_col1">
-                            <img src="./images/goods.png" alt="">
+                            <img :src="order.imgUrl" alt="商品图片">
                         </div>
                         <div class="trade_main_order_good_main_col2">
                             <div>
-                                Apple iPhone 6s (A1700) 64G 玫瑰金色 移动联通电信4G手机硅胶透明防摔软壳 本色系列</div>
+                                {{ order.skuName }}</div>
                             <div class="bottom">7天无理由退货</div>
                         </div>
-                        <div class="trade_main_order_good_main_col3">￥5399.00</div>
-                        <div class="trade_main_order_good_main_col4">X1</div>
+                        <div class="trade_main_order_good_main_col3">￥{{ order.orderPrice }}</div>
+                        <div class="trade_main_order_good_main_col4">X{{ order.skuNum }}</div>
                         <div class="trade_main_order_good_main_col5">有货</div>
                     </div>
                 </div>
@@ -108,9 +149,7 @@ const changeDefault = (address, addressInfo) => {
                 <div class="trade_main_message_top">
                     买家留言
                 </div>
-                <div class="trade_main_message_bottom">
-                    建议留言前先与商家沟通确认
-                </div>
+                <textarea class="trade_main_message_bottom" placeholder="建议留言前先与商家沟通确认" v-model="msg"></textarea>
             </div>
             <div class="trade_main_bill">
                 <div class="trade_main_bill_top">发票信息</div>
@@ -121,8 +160,8 @@ const changeDefault = (address, addressInfo) => {
         <div class="trade_bottom">
             <div class="trade_bottom_top">
                 <div class="trade_bottom_top_first">
-                    <p>1件商品，总商品金额</p>
-                    <p>¥5399.00</p>
+                    <p>{{ totalNum }}件商品，总商品金额</p>
+                    <p>¥{{ totalPrice }}</p>
                 </div>
                 <div class="trade_bottom_top_second">
                     <p>返现：</p>
@@ -136,13 +175,13 @@ const changeDefault = (address, addressInfo) => {
             <div class="trade_bottom_mid">
                 <div class="trade_bottom_mid_top">
                     <p>应付金额:　</p>
-                    <p>¥5399.00</p>
+                    <p>¥{{ totalPrice }}</p>
                 </div>
                 <div class="trade_bottom_mid_bottom">
                     <p>
                         寄送至:
                     </p>
-                    <p>北京市昌平区宏福科技园综合楼6层</p>
+                    <p>{{ userDefaultAddress }}</p>
                     <p>
                         收货人：</p>
                     <p>张三</p>
@@ -151,7 +190,7 @@ const changeDefault = (address, addressInfo) => {
             </div>
             <div class="trade_bottom_submit">
                 <div class="container">
-                    <a href="###">提交订单</a>
+                    <a @click="submitOrder">提交订单</a>
                 </div>
             </div>
         </div>
@@ -161,6 +200,10 @@ const changeDefault = (address, addressInfo) => {
 <style lang="less">
 .trade {
     margin: 0 110px;
+
+    .selected {
+        background: red;
+    }
 
     &_top {
         margin-top: 30px;
@@ -210,13 +253,18 @@ const changeDefault = (address, addressInfo) => {
                 &_middle {
                     display: flex;
 
+                    &:hover {
+                        cursor: pointer;
+                        background: #878787;
+                    }
+
                     &>p:first-child {
                         margin-right: 10px;
                     }
                 }
 
                 &_right {
-                    padding: 5px;
+                    // padding: 5px;
                     margin-left: 10px;
                     background-color: #878787;
                     color: #fff;
@@ -357,8 +405,8 @@ const changeDefault = (address, addressInfo) => {
             }
 
             &_bottom {
-                border: 1px solid #e1e1e1;
-                padding-bottom: 60px;
+                width: 100%;
+                height: 93px;
             }
         }
 
@@ -457,6 +505,10 @@ const changeDefault = (address, addressInfo) => {
                 margin-top: 20px;
                 text-align: center;
                 background-color: rgb(225, 37, 27);
+
+                &:hover {
+                    cursor: pointer;
+                }
 
                 a {
                     text-decoration: none;

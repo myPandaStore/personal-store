@@ -6,7 +6,10 @@ import {
   getCartList,
   checkCart,
   addToCart,
-  deleteCart
+  deleteCart,
+  getUserAddress,
+  getOrderInfo,
+  submitOrder
 } from "../router_handler/userinfo.js";
 
 const router = express.Router();
@@ -32,5 +35,15 @@ router.post("/cartList/addToCart/:skuName/:skuNum", addToCart);
 
 // 删除某一个购物产品
 router.post("/cartList/deleteCart/:skuName", deleteCart);
+
+// 用户地址信息
+router.get('/userAddress', getUserAddress)
+
+// 用户订单信息
+router.get('/orderInfo', getOrderInfo)
+
+// 提交订单
+router.post('/submitOrder', submitOrder)
+
 // 将路由对象共享出去
 export default router;

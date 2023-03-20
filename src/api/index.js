@@ -119,4 +119,33 @@ export const reqDeleteCartBySkuName = (skuName) =>
     method: "post",
   });
 
-  
+// 获取用户地址信息
+export const reqAddressInfo = () =>
+  requests({
+    headers: {
+      Authorization: localStorage.getItem("TOKEN"),
+    },
+    url: "/my/userAddress",
+    method: "get",
+  });
+
+// 获取用户订单信息
+export const reqOrderInfo = () =>
+  requests({
+    headers: {
+      Authorization: localStorage.getItem("TOKEN"),
+    },
+    url: "/my/orderInfo",
+    method: "get",
+  });
+
+//提交订单的接口
+export const reqSubmitOrder = (tradeNo, data) =>
+  requests({
+    headers: {
+      Authorization: localStorage.getItem("TOKEN"),
+    },
+    url: `/my/submitOrder?tradeNo=${tradeNo}`,
+    data,
+    method: "post",
+  });

@@ -139,3 +139,67 @@ export const deleteCart = (req, res) => {
   cartList = cartList.filter((item) => item.skuName !== skuName);
   res.send(cartList);
 };
+
+export const getUserAddress = (req, res) => {
+  let addressList = [
+    {
+      id: 0,
+      username: "张三",
+      isDefault: "0",
+      consignee: "hhh",
+      fullAddress: "北京市昌平区宏福科技园综合楼6层",
+      phoneNum: "15010658793",
+    },
+    {
+      id: 1,
+      username: "李四",
+      isDefault: "0",
+      consignee: "hhh",
+      fullAddress: "北京市昌平区宏福科技园综合楼6层",
+      phoneNum: "13590909098",
+    },
+    {
+      id: 2,
+      username: "王五",
+      isDefault: "1",
+      consignee: "北京市昌平区宏福科技园综合楼6层",
+      fullAddress: "北京市昌平区宏福科技园综合楼6层",
+      phoneNum: "13590909098",
+    },
+  ];
+  res.send(addressList);
+};
+
+export const getOrderInfo = (req, res) => {
+  let ranDamId = Math.floor(Math.random() * 9);
+  let orderInfo = {
+    orderId: ranDamId,
+    detailArrayList: [
+      {
+        imgUrl: "http://127.0.0.1:3007/trade/goods.png",
+        skuName:
+          "Apple iPhone 6s (A1700) 64G 玫瑰金色 移动联通电信4G手机硅胶透明防摔软壳 本色系列",
+        skuId: "0",
+        orderPrice: 123,
+        skuNum: 1111,
+      },
+      {
+        imgUrl: "http://127.0.0.1:3007/trade/goods.png",
+        skuName:
+          "Apple iPhone 6s (A1700) 64G 玫瑰金色 移动联通电信4G手机硅胶透明防摔软壳 本色系列",
+        skuId: "1",
+        orderPrice: 123,
+        skuNum: 1111,
+      },
+    ],
+  };
+  res.send(orderInfo);
+};
+
+export const submitOrder = (req, res) => {
+  let orderId = Math.floor(Math.random() * 9)
+  res.send({
+    code: 200,
+    tradNo: orderId,
+  });
+};
