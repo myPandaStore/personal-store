@@ -21,7 +21,10 @@ const Search = () => import("@/pages/Search/Search.vue");
 const ShopCart = () => import("@/pages/ShopCart/ShopCart.vue");
 const Trade = () => import("@/pages/Trade/Trade.vue");
 const Pay = () => import("@/pages/Pay/Pay.vue");
-const PaySuccess = () => import("@/pages/PaySuccess/PaySucess.vue")
+const PaySuccess = () => import("@/pages/PaySuccess/PaySucess.vue");
+const Center = () => import("@/pages/Center/Center.vue");
+const MyOrder = () => import("@/pages/Center/MyOrder.vue");
+const GroupOrder = () => import("@/pages/Center/GroupOrder.vue");
 const Detail = () => import("@/pages/Detail/Deatil.vue");
 
 const routes = [
@@ -92,6 +95,31 @@ const routes = [
     meta: {
       show: true,
     },
+    beforeEnter: (to, from) => {
+      if (from.path == "/pay") {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+  {
+    path: "/center",
+    component: Center,
+    name: "Center",
+    meta: {
+      show: true,
+    },
+    children:[
+      {
+        path: "/center/myOrder",
+        component: MyOrder
+      },
+      {
+        path: "/center/groupOrder",
+        component: GroupOrder
+      }
+    ]
   },
   {
     path: "/detail/:id",

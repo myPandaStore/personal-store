@@ -177,6 +177,7 @@ const totalPrice = computed(() => {
 .cart {
   width: 1200px;
   margin: 0 auto;
+  margin-bottom: 20px;
 
   ul {
     list-style: none;
