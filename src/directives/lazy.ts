@@ -1,11 +1,14 @@
 import { DirectiveBinding } from 'vue'
 
+// 监听元素是否在视口区域
 function isInViewport(el: HTMLElement) {
-    // debugger
+    // 返回一个 DOMRect 对象，其提供了元素的大小及其相对于视口的位置。
     const rect = el.getBoundingClientRect()
+    // window.innerHeight ：浏览器窗口的视口（viewport）高度（以像素为单位）；如果有水平滚动条，也包括滚动条高度。
     return rect.top <= window.innerHeight && rect.bottom >= 0
 }
 
+// 加载图片
 function loadImage(el: HTMLImageElement, binding: DirectiveBinding) {
     const imgSrc = binding.value
     const img = new Image()
