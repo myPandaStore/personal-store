@@ -11,7 +11,9 @@ import {
   getOrderInfo,
   submitOrder,
   getPayInfo,
-  getStatus
+  getStatus,
+  getMyOrder,
+  getItem
 } from "../router_handler/userinfo.js";
 
 const router = express.Router();
@@ -24,6 +26,9 @@ router.get("/getUserInfo", getUserInfo);
 
 // 根据用户搜索提供 search 模块数据
 router.post("/list", getSearchInfo);
+
+// 产品详情信息
+router.get("/item/:skuId", getItem)
 
 // 提供购物车列表数据
 router.get("/cartList", getCartList);
@@ -52,6 +57,9 @@ router.get("/pay/:orderId", getPayInfo);
 
 // 支付状态
 router.get("/pay/status/:orderId", getStatus)
+
+// 个人中心的订单数据
+router.get("/order/:page/:limit", getMyOrder)
 
 // 将路由对象共享出去
 export default router;

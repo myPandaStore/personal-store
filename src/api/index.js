@@ -79,6 +79,16 @@ export const reqGetSearchInfo = (params) =>
     data: params,
   });
 
+//获取产品详情信息的接口
+export const reqGoodsInfo = (skuId) =>
+  requests({
+    headers: {
+      Authorization: localStorage.getItem("TOKEN"),
+    },
+    url: `/my/item/${skuId}`,
+    method: "get",
+  });
+
 //获取购物车列表数据接口
 export const reqCartList = () =>
   requests({
@@ -139,7 +149,7 @@ export const reqOrderInfo = () =>
     method: "get",
   });
 
-//提交订单的接口
+// 提交订单的接口
 export const reqSubmitOrder = (tradeNo, data) =>
   requests({
     headers: {
@@ -150,7 +160,7 @@ export const reqSubmitOrder = (tradeNo, data) =>
     method: "post",
   });
 
-//获取支付信息
+// 获取支付信息
 export const reqPayInfo = (orderId) =>
   requests({
     headers: {
@@ -160,12 +170,22 @@ export const reqPayInfo = (orderId) =>
     method: "get",
   });
 
-//获取支付订单状态
+// 获取支付订单状态
 export const reqPayStatus = (orderId) =>
   requests({
     headers: {
       Authorization: localStorage.getItem("TOKEN"),
     },
     url: `/my/pay/status/${orderId}`,
+    method: "get",
+  });
+
+// 获取个人中心的数据
+export const reqMyOrderList = (page, limit) =>
+  requests({
+    headers: {
+      Authorization: localStorage.getItem("TOKEN"),
+    },
+    url: `/my/order//${page}/${limit}`,
     method: "get",
   });

@@ -78,6 +78,7 @@ const submitOrder = async() => {
         if (result?.code == 200) {
             orderId.value = result?.tradNo
             router.push('/pay?orderId=' + orderId.value)
+            // router.push('/trade')
         }
     } catch (error) {
         alert(error.message)

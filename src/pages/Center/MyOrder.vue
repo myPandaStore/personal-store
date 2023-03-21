@@ -1,4 +1,31 @@
-<script></script>
+<script setup lang="ts">
+import { ref, onMounted } from 'vue';
+import { reqMyOrderList } from "../../api"
+
+// 初始化当前页码数
+const page = ref(1)
+
+// 初始化每页展示的数据个数
+const limit = ref(3)
+
+// 初始化我的订单的数据
+const order = ref({})
+
+onMounted(() => {
+    getData()
+})
+
+const getData = async () => {
+    let result = await reqMyOrderList(page.value, limit.value)
+    try {
+        if (result.code == 200) {
+            order.value = result.data
+        }
+    } catch (error) {
+        alert(error.message)
+    }
+}
+</script>
 <template>
     <div class="order">
         <div class="order_myOrder">我的订单</div>
@@ -50,6 +77,74 @@
                 </div>
             </div>
         </div>
+        <div class="order_detail">
+            <div class="order_detail_top">2017-02-11 11:59　订单编号：7867473872181848 </div>
+            <div class="order_detail_main">
+                <div class="order_detail_main_left">
+                    <ul>
+                        <li>
+                            <img src="./images/goods.png" alt="">
+                            <a href="">包邮 正品玛姬儿压缩面膜无纺布纸膜100粒 送泡瓶面膜刷喷瓶 新款</a>
+                            <span>x1</span>
+                            <span>售后申请</span>
+                        </li>
+                        <li></li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <img src="./images/goods.png" alt="">
+                            <a href="">包邮 正品玛姬儿压缩面膜无纺布纸膜100粒 送泡瓶面膜刷喷瓶 新款</a>
+                            <span>x1</span>
+                            <span>售后申请</span>
+                        </li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div class="order_detail_main_right">
+                    <span>小丽</span>
+                    <span>
+                        <p>总金额¥138.00 </p>
+                        <p>在线支付</p>
+                    </span>
+                    <span>已完成</span>
+                    <span>评价|晒单</span>
+                </div>
+            </div>
+        </div>
+        <el-pagination layout="prev, pager, next" :total="1000" />
+        <div class="order_like">
+            <div class="order_like_top">猜你喜欢</div>
+            <div class="order_like_main">
+                <div class="order_like_main_item">
+                    <img src="./images/itemlike04.png" alt="">
+                    <p>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</p>
+                    <p>¥3699.00</p>
+                    <p>已有6人评价
+                    </p>
+                </div>
+                <div class="order_like_main_item">
+                    <img src="./images/itemlike03.png" alt="">
+                    <p>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</p>
+                    <p>¥3699.00</p>
+                    <p>已有6人评价
+                    </p>
+                </div>
+                <div class="order_like_main_item">
+                    <img src="./images/itemlike02.png" alt="">
+                    <p>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</p>
+                    <p>¥3699.00</p>
+                    <p>已有6人评价
+                    </p>
+                </div>
+                <div class="order_like_main_item">
+                    <img src="./images/itemlike01.png" alt="">
+                    <p>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</p>
+                    <p>¥3699.00</p>
+                    <p>已有6人评价
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <style lang="less">
@@ -85,6 +180,7 @@
 
     &_detail {
         margin-top: 20px;
+        margin-bottom: 40px;
         border: 1px solid #e1e1e1;
 
         &_top {
@@ -169,7 +265,27 @@
                         border: none;
                     }
                 }
+            }
+        }
+    }
 
+    &_like {
+        border: 1px solid #e1e1e1;
+        margin-top: 20px;
+
+        &_top {
+            background: #f1f1f1;
+            padding: 10px;
+        }
+
+        &_main {
+            display: flex;
+            padding: 20px;
+
+            p:nth-child(3) {
+                color: red;
+                font-size: 18px;
+                font-weight: bold;
             }
         }
     }

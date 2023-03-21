@@ -1,17 +1,6 @@
 // @ts-nocheck
-import {
-  createRouter,
-  createWebHistory,
-  // Router
-} from "vue-router";
-
-// const originalPush = Router.prototype.push;
-// Router.prototype.push = function push(location, onResolve, onReject) {
-//     if (onResolve || onReject) {
-//         return originalPush.call(this, location, onResolve, onReject);
-//     }
-//     return originalPush.call(this, location).catch(err => err);
-// };
+import { createRouter, createWebHistory } from "vue-router";
+import { userStore } from "../stores/user";
 
 // 路由懒加载
 const Regist = () => import("@/pages/Regist/Regist.vue");
@@ -110,16 +99,16 @@ const routes = [
     meta: {
       show: true,
     },
-    children:[
+    children: [
       {
         path: "/center/myOrder",
-        component: MyOrder
+        component: MyOrder,
       },
       {
         path: "/center/groupOrder",
-        component: GroupOrder
-      }
-    ]
+        component: GroupOrder,
+      },
+    ],
   },
   {
     path: "/detail/:id",
@@ -130,6 +119,37 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+// 全局前置守卫
+router.beforeEach((to, from) => {
+  let TOKEN = localStorage.getItem("TOKEN");
+  const useUserStore = userStore();
+  let name = useUserStore.userName;
+  // 用户已经登陆
+  if (TOKEN) {
+    // 已经登陆注册，不能在去登陆注册页面
+    if (to.path == "/login" || to.path == "/regist") {
+      return false;
+    } else {
+      // 登陆了且拥有用户信息放行
+      if (name) {
+        return true;
+      }
+    }
+  } else {
+    // 未登陆：不能去交易相关、支付相关、个人中心
+    let toPath = to.path;
+    if (
+      toPath.indexOf("/trade") !== -1 ||
+      toPath.indexOf("/pay") !== -1 ||
+      toPath.indexOf("/center") !== -1
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 });
 
 export default router;

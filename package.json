@@ -38,6 +38,7 @@
     "reflect-metadata": "^0.1.13",
     "swiper": "^9.0.5",
     "typeorm": "^0.3.12",
+    "uuid": "^9.0.0",
     "vee-validate": "^4.5.8",
     "vue": "^3.2.45",
     "vue-i18n": "^9.2.2",

@@ -33,5 +33,8 @@ router.get('/getFloorBanner', getFloorBanner)
 
 // 三级列表的数据
 router.get('/product/getBaseCategoryList', getBaseCategoryLis)
+
+
+
 // 将路由对象共享出去
 export default router

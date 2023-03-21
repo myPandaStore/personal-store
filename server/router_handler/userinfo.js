@@ -218,7 +218,29 @@ export const getPayInfo = (req, res) => {
 export const getStatus = (req, res) => {
   let result = {
     code: 200,
-
-  }
+  };
   res.send(result);
+};
+
+export const getMyOrder = (req, res) => {
+  let data = {
+    code: 200,
+    data: {
+      hhh: "test",
+    },
+  };
+  res.send(data);
+};
+
+export const getItem = (req, res) => {
+  let data = {
+    code: 200,
+    data: {
+      "hhh":{
+        
+      },
+      "jjj":"test"
+    }
+  }
+  res.send(data)
 };

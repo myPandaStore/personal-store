@@ -30,20 +30,10 @@ export const userStore = defineStore('user', {
                 this.token = ""
                 this.userName = ""
                 this.userInfo = []
+                localStorage.removeItem("TOKEN")
             } else {
                 return Promise.reject(new Error('faile'))
             }
         }
-
-        // 获取用户信息
-        // async getUserInfo(data) {
-        //     let result = await reqUserInfo(data);
-        //     debugger
-        //     if(result.status == 0) {
-        //         this.userInfo = result[0]
-        //     } else {
-        //         return Promise.reject(new Error('faile'))
-        //     }
-        // },
     }
 })
