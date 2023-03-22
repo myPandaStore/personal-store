@@ -1,4 +1,10 @@
-<script></script>
+<script setup lang="ts">
+// @ts-nocheck
+import like01Img from "@/assets/Home/like_01.png"
+import like02Img from "@/assets/Home/like_02.png"
+import like03Img from "@/assets/Home/like_03.png"
+
+</script>
 <template>
     <div class="like">
         <div class="like_top">
@@ -12,32 +18,32 @@
         </div>
         <div class="like_list">
             <div class="like_list_item">
-                <img src="@/assets/Home/like_01.png" alt="">
+                <img v-lazy="like01Img" alt="like01">
                 <p>阳光美包新款单肩包女包时尚子母包四件套女</p>
                 <p>￥116</p>
             </div>
             <div class="like_list_item">
-                <img src="@/assets/Home/like_02.png" alt="">
+                <img v-lazy="like02Img" alt="like02">
                 <p>阳光美包新款单肩包女包时尚子母包四件套女</p>
                 <p>￥116</p>
             </div>
             <div class="like_list_item">
-                <img src="@/assets/Home/like_03.png" alt="">
+                <img v-lazy="like03Img" alt="like03">
                 <p>阳光美包新款单肩包女包时尚子母包四件套女</p>
                 <p>￥116</p>
             </div>
             <div class="like_list_item">
-                <img src="@/assets/Home/like_01.png" alt="">
+                <img v-lazy="like01Img" alt="like01">
                 <p>阳光美包新款单肩包女包时尚子母包四件套女</p>
                 <p>￥116</p>
             </div>
             <div class="like_list_item">
-                <img src="@/assets/Home/like_02.png" alt="">
+                <img v-lazy="like02Img" alt="like02">
                 <p>阳光美包新款单肩包女包时尚子母包四件套女</p>
                 <p>￥116</p>
             </div>
             <div class="like_list_item">
-                <img src="@/assets/Home/like_03.png" alt="">
+                <img v-lazy="like03Img" alt="like03">
                 <p>阳光美包新款单肩包女包时尚子母包四件套女</p>
                 <p>￥116</p>
             </div>

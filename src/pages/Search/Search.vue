@@ -2,6 +2,11 @@
 import { ref, onBeforeMount, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { searchStore } from "../../stores/search";
+import phone1Img from "@/assets/Search/phone01.png"
+import phone2Img from "@/assets/Search/phone02.png"
+import phone3Img from "@/assets/Search/phone06.png"
+import phone4Img from "@/assets/Search/phone07.png"
+import phone5Img from "@/assets/Search/mobile03.png"
 
 const route = useRoute();
 const useSearchStore = searchStore();
@@ -83,45 +88,45 @@ watch(
                   <div class="item_right_img_top_item">飞利浦（PHILIPS）</div>
                   <div class="item_right_img_top_item">风行电视</div>
                   <div class="item_right_img_top_item">
-                    <img src="@/assets/Search/phone01.png" alt="测试图片" />
+                    <img v-lazy="phone1Img" alt="测试图片" />
                   </div>
                   <div class="item_right_img_top_item">
-                    <img src="@/assets/Search/phone02.png" alt="测试图片" />
+                    <img v-lazy="phone2Img" alt="测试图片" />
                   </div>
                   <div class="item_right_img_top_item">
-                    <img src="@/assets/Search/phone06.png" alt="测试图片" />
+                    <img v-lazy="phone3Img" alt="测试图片" />
                   </div>
                   <div class="item_right_img_top_item">
-                    <img src="@/assets/Search/phone07.png" alt="测试图片" />
+                    <img v-lazy="phone4Img" alt="测试图片" />
                   </div>
                 </div>
                 <div class="item_right_img_bottom">
                   <div class="item_right_img_bottom_item">
-                    <img src="@/assets/Search/phone01.png" alt="测试图片" />
+                    <img v-lazy="phone1Img" alt="测试图片" />
                   </div>
                   <div class="item_right_img_bottom_item">
-                    <img src="@/assets/Search/phone01.png" alt="测试图片" />
+                    <img v-lazy="phone1Img" alt="测试图片" />
                   </div>
                   <div class="item_right_img_bottom_item">
-                    <img src="@/assets/Search/phone01.png" alt="测试图片" />
+                    <img v-lazy="phone1Img" alt="测试图片" />
                   </div>
                   <div class="item_right_img_bottom_item">
-                    <img src="@/assets/Search/phone01.png" alt="测试图片" />
+                    <img v-lazy="phone1Img" alt="测试图片" />
                   </div>
                   <div class="item_right_img_bottom_item">
-                    <img src="@/assets/Search/phone01.png" alt="测试图片" />
+                    <img v-lazy="phone1Img" alt="测试图片" />
                   </div>
                   <div class="item_right_img_bottom_item">
-                    <img src="@/assets/Search/phone01.png" alt="测试图片" />
+                    <img v-lazy="phone1Img" alt="测试图片" />
                   </div>
                   <div class="item_right_img_bottom_item">
-                    <img src="@/assets/Search/phone01.png" alt="测试图片" />
+                    <img v-lazy="phone1Img" alt="测试图片" />
                   </div>
                   <div class="item_right_img_bottom_item">
-                    <img src="@/assets/Search/phone01.png" alt="测试图片" />
+                    <img v-lazy="phone1Img" alt="测试图片" />
                   </div>
                   <div class="item_right_img_bottom_item">
-                    <img src="@/assets/Search/phone01.png" alt="测试图片" />
+                    <img v-lazy="phone1Img" alt="测试图片" />
                   </div>
                 </div>
               </div>
@@ -195,9 +200,8 @@ watch(
         <div class="search_detail_list_top">
           <div class="search_detail_list_top_item">
             <router-link :to="`/shopcard/${good.title}`">
-              <img src="@/assets/Search/mobile03.png" alt="测试图片" />
+              <img v-lazy="phone5Img" alt="测试图片" />
             </router-link>
-
             <div class="price">¥6088.00</div>
             <div class="description">
               Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s
@@ -214,7 +218,7 @@ watch(
             </div>
           </div>
           <div class="search_detail_list_top_item">
-            <img src="@/assets/Search/mobile03.png" alt="测试图片" />
+            <img v-lazy="phone5Img" alt="测试图片" />
             <div class="price">¥6088.00</div>
             <div class="description">
               Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s
@@ -231,7 +235,7 @@ watch(
             </div>
           </div>
           <div class="search_detail_list_top_item">
-            <img src="@/assets/Search/mobile03.png" alt="测试图片" />
+            <img v-lazy="phone5Img" alt="测试图片" />
             <div class="price">¥6088.00</div>
             <div class="description">
               Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s
@@ -248,7 +252,7 @@ watch(
             </div>
           </div>
           <div class="search_detail_list_top_item">
-            <img src="@/assets/Search/mobile03.png" alt="测试图片" />
+            <img v-lazy="phone5Img" alt="测试图片" />
             <div class="price">¥6088.00</div>
             <div class="description">
               Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s
@@ -265,7 +269,7 @@ watch(
             </div>
           </div>
           <div class="search_detail_list_top_item">
-            <img src="@/assets/Search/mobile03.png" alt="测试图片" />
+            <img v-lazy="phone5Img" alt="测试图片" />
             <div class="price">¥6088.00</div>
             <div class="description">
               Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s
@@ -284,7 +288,7 @@ watch(
         </div>
         <div class="search_detail_list_top">
           <div class="search_detail_list_top_item">
-            <img src="@/assets/Search/mobile03.png" alt="测试图片" />
+            <img v-lazy="phone5Img" alt="测试图片" />
             <div class="price">¥6088.00</div>
             <div class="description">
               Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s
@@ -301,7 +305,7 @@ watch(
             </div>
           </div>
           <div class="search_detail_list_top_item">
-            <img src="@/assets/Search/mobile03.png" alt="测试图片" />
+            <img v-lazy="phone5Img" alt="测试图片" />
             <div class="price">¥6088.00</div>
             <div class="description">
               Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s
@@ -318,7 +322,7 @@ watch(
             </div>
           </div>
           <div class="search_detail_list_top_item">
-            <img src="@/assets/Search/mobile03.png" alt="测试图片" />
+            <img v-lazy="phone5Img" alt="测试图片" />
             <div class="price">¥6088.00</div>
             <div class="description">
               Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s
@@ -335,7 +339,7 @@ watch(
             </div>
           </div>
           <div class="search_detail_list_top_item">
-            <img src="@/assets/Search/mobile03.png" alt="测试图片" />
+            <img v-lazy="phone5Img" alt="测试图片" />
             <div class="price">¥6088.00</div>
             <div class="description">
               Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s
@@ -352,7 +356,7 @@ watch(
             </div>
           </div>
           <div class="search_detail_list_top_item">
-            <img src="@/assets/Search/mobile03.png" alt="测试图片" />
+            <img v-lazy="phone5Img" alt="测试图片" />
             <div class="price">¥6088.00</div>
             <div class="description">
               Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s
@@ -371,16 +375,8 @@ watch(
         </div>
       </div>
       <div class="demo-pagination-block">
-        <el-pagination
-          v-model:current-page="currentPageNumber"
-          :page-size="10"
-          :small="false"
-          :disabled="false"
-          :background="false"
-          layout="total, prev, pager, next"
-          :total="1000"
-        />
-        <!-- <div class="demonstration">Total item count</div> -->
+        <el-pagination v-model:current-page="currentPageNumber" :page-size="10" :small="false" :disabled="false"
+          :background="false" layout="total, prev, pager, next" :total="1000" />
       </div>
     </div>
   </div>
@@ -397,7 +393,7 @@ watch(
       display: flex;
       align-items: center;
 
-      & > li {
+      &>li {
         border: 1px solid #e1e1e1;
         background-color: #f7f7f7;
         margin-right: 10px;
@@ -405,14 +401,14 @@ watch(
         align-items: center;
         padding: 0 10px;
 
-        & > .delete {
+        &>.delete {
           margin-left: 10px;
           cursor: pointer;
           font: 400 14px tahoma;
         }
       }
 
-      & > li:first-child {
+      &>li:first-child {
         color: #666;
         text-decoration: none;
         margin: 0 20px 0 10px;
@@ -425,13 +421,13 @@ watch(
 
   &_main {
     &_attribute {
-      & > ul {
+      &>ul {
         list-style: none;
         margin: 10px 0 0 0;
         padding: 0;
         border: 1px solid #e1e1e1;
 
-        & > .item:first-child {
+        &>.item:first-child {
           .item_left {
             width: 124px;
             height: 124px;
@@ -478,7 +474,7 @@ watch(
                   line-height: 52px;
                   border-right: 1px solid #e1e1e1;
 
-                  & > img {
+                  &>img {
                     max-width: 100%;
                     max-height: 100%;
                   }
@@ -518,7 +514,7 @@ watch(
           }
         }
 
-        & > .item {
+        &>.item {
           display: flex;
           justify-content: space-between;
           border-bottom: 1px solid #e1e1e1;
@@ -559,7 +555,7 @@ watch(
       border-radius: 0;
       box-shadow: 0 1px 4px rgb(0 0 0 / 7%);
 
-      & > .search_main_tottom_item {
+      &>.search_main_tottom_item {
         padding: 11px 15px;
         color: #777;
         text-decoration: none;
@@ -586,13 +582,13 @@ watch(
         justify-content: space-between;
 
         &_item {
-          & > .price {
+          &>.price {
             font-weight: 700;
             font-size: 18px;
             color: #c81623;
           }
 
-          & > .description {
+          &>.description {
             width: 85%;
             overflow: hidden;
             margin-bottom: 8px;
@@ -604,19 +600,19 @@ watch(
             -webkit-line-clamp: 2;
           }
 
-          & > .judge {
+          &>.judge {
             font-style: normal;
             display: flex;
             align-items: center;
             color: #a7a7a7;
 
-            & > .judge_number {
+            &>.judge_number {
               font-weight: 700;
               color: #646fb0;
             }
           }
 
-          & > .bottom {
+          &>.bottom {
             display: flex;
             justify-content: space-between;
             align-items: center;

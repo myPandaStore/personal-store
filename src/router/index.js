@@ -14,7 +14,6 @@ const PaySuccess = () => import("@/pages/PaySuccess/PaySucess.vue");
 const Center = () => import("@/pages/Center/Center.vue");
 const MyOrder = () => import("@/pages/Center/MyOrder.vue");
 const GroupOrder = () => import("@/pages/Center/GroupOrder.vue");
-const Detail = () => import("@/pages/Detail/Deatil.vue");
 
 const routes = [
   {
@@ -94,6 +93,7 @@ const routes = [
   },
   {
     path: "/center",
+    redirect: "/center/myOrder",
     component: Center,
     name: "Center",
     meta: {
@@ -110,11 +110,11 @@ const routes = [
       },
     ],
   },
-  {
-    path: "/detail/:id",
-    component: Detail,
-    name: "Detail",
-  },
+  // {
+  //   path: "/detail/:id",
+  //   component: Detail,
+  //   name: "Detail",
+  // },
 ];
 const router = createRouter({
   history: createWebHistory(),

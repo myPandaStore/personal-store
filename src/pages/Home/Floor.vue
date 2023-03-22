@@ -1,6 +1,13 @@
 <script setup lang="ts">
+// @ts-nocheck
 import { ref, onMounted } from "vue";
 import { reqFloorBanner } from "../../api/index";
+import floor1Img from "@/assets/Home/floor-1-1.png"
+import floor2Img from "@/assets/Home/floor-1-2.png"
+import floor3Img from "@/assets/Home/floor-1-3.png"
+import floor4Img from "@/assets/Home/floor-1-4.png"
+import floor5Img from "@/assets/Home/floor-1-5.png"
+import floor6Img from "@/assets/Home/floor-1-6.png"
 
 const list = ref([]);
 
@@ -38,28 +45,28 @@ onMounted(async () => {
               <li>电热水器</li>
             </ul>
           </div>
-          <img src="@/assets/Home/floor-1-1.png" alt="" />
+          <img v-lazy="floor1Img" alt="floor-1" />
         </li>
         <li class="floor_content_item2">
           <Carousel :list="list" />
         </li>
         <li class="floor_content_item3">
           <div class="item3_top">
-            <img src="@/assets/Home/floor-1-2.png" alt="" />
+            <img v-lazy="floor2Img" alt="floor-2" />
           </div>
           <div class="item3_bottom">
-            <img src="@/assets/Home/floor-1-3.png" alt="" />
+            <img v-lazy="floor3Img" alt="floor-3" />
           </div>
         </li>
         <li class="floor_content_item4">
-          <img src="@/assets/Home/floor-1-4.png" alt="" />
+          <img v-lazy="floor4Img" alt="floor-4" />
         </li>
         <li class="floor_content_item5">
           <div class="item5_top">
-            <img src="@/assets/Home/floor-1-5.png" alt="" />
+            <img v-lazy="floor5Img" alt="floor-5" />
           </div>
           <div class="item_bottom">
-            <img src="@/assets/Home/floor-1-6.png" alt="" />
+            <img v-lazy="floor6Img" alt="floor-6" />
           </div>
         </li>
       </ul>

@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { reqMyOrderList } from "../../api"
+import goodsImg from "./images/goods.png" 
+import goodsImg2 from "./images/itemlike04.png"
+import goodsImg3 from "./images/itemlike03.png"
+import goodsImg4 from "./images/itemlike02.png"
+import goodsImg5 from "./images/itemlike01.png"
 
 // 初始化当前页码数
 const page = ref(1)
@@ -49,7 +54,7 @@ const getData = async () => {
                 <div class="order_detail_main_left">
                     <ul>
                         <li>
-                            <img src="./images/goods.png" alt="">
+                            <img v-lazy="goodsImg" alt="商品图片">
                             <a href="">包邮 正品玛姬儿压缩面膜无纺布纸膜100粒 送泡瓶面膜刷喷瓶 新款</a>
                             <span>x1</span>
                             <span>售后申请</span>
@@ -58,7 +63,7 @@ const getData = async () => {
                     </ul>
                     <ul>
                         <li>
-                            <img src="./images/goods.png" alt="">
+                            <img v-lazy="goodsImg" alt="商品图片">
                             <a href="">包邮 正品玛姬儿压缩面膜无纺布纸膜100粒 送泡瓶面膜刷喷瓶 新款</a>
                             <span>x1</span>
                             <span>售后申请</span>
@@ -83,7 +88,7 @@ const getData = async () => {
                 <div class="order_detail_main_left">
                     <ul>
                         <li>
-                            <img src="./images/goods.png" alt="">
+                            <img v-lazy="goodsImg" alt="商品图片">
                             <a href="">包邮 正品玛姬儿压缩面膜无纺布纸膜100粒 送泡瓶面膜刷喷瓶 新款</a>
                             <span>x1</span>
                             <span>售后申请</span>
@@ -92,7 +97,7 @@ const getData = async () => {
                     </ul>
                     <ul>
                         <li>
-                            <img src="./images/goods.png" alt="">
+                            <img v-lazy="goodsImg" alt="商品图片">
                             <a href="">包邮 正品玛姬儿压缩面膜无纺布纸膜100粒 送泡瓶面膜刷喷瓶 新款</a>
                             <span>x1</span>
                             <span>售后申请</span>
@@ -116,28 +121,28 @@ const getData = async () => {
             <div class="order_like_top">猜你喜欢</div>
             <div class="order_like_main">
                 <div class="order_like_main_item">
-                    <img src="./images/itemlike04.png" alt="">
+                    <img v-lazy="goodsImg2" alt="商品图片">
                     <p>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</p>
                     <p>¥3699.00</p>
                     <p>已有6人评价
                     </p>
                 </div>
                 <div class="order_like_main_item">
-                    <img src="./images/itemlike03.png" alt="">
+                    <img v-lazy="goodsImg3" alt="商品图片">
                     <p>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</p>
                     <p>¥3699.00</p>
                     <p>已有6人评价
                     </p>
                 </div>
                 <div class="order_like_main_item">
-                    <img src="./images/itemlike02.png" alt="">
+                    <img v-lazy="goodsImg4" alt="商品图片">
                     <p>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</p>
                     <p>¥3699.00</p>
                     <p>已有6人评价
                     </p>
                 </div>
                 <div class="order_like_main_item">
-                    <img src="./images/itemlike01.png" alt="">
+                    <img v-lazy="goodsImg5" alt="商品图片">
                     <p>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</p>
                     <p>¥3699.00</p>
                     <p>已有6人评价

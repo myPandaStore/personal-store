@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { reqBanner } from "../../api/index";
+// @ts-ignore
+import img from "@/assets/ad1.png";
 
+// 广告图片
+const adImg = ref<string>(img)
 const listContainerList = ref([]);
 
 onMounted(async () => {
@@ -9,6 +13,9 @@ onMounted(async () => {
   // @ts-ignore
   listContainerList.value = res
 });
+
+
+
 </script>
 <template>
   <div class="list_container">
@@ -53,61 +60,61 @@ onMounted(async () => {
       <ul class="list_right_services_list">
         <li>
           <div class="list_right_servirces_item">
-            <i></i>
+            <i class=".lazy-background"></i>
             <span>话费</span>
           </div>
           <div class="list_right_servirces_item">
-            <i></i>
+            <i class=".lazy-background"></i>
             <span>机票</span>
           </div>
           <div class="list_right_servirces_item">
-            <i></i>
+            <i class=".lazy-background"></i>
             <span>电影城</span>
           </div>
           <div class="list_right_servirces_item">
-            <i></i>
+            <i class=".lazy-background"></i>
             <span>游戏</span>
           </div>
         </li>
         <li>
           <div class="list_right_servirces_item">
-            <i></i>
+            <i class=".lazy-background"></i>
             <span>彩票</span>
           </div>
           <div class="list_right_servirces_item">
-            <i></i>
+            <i class=".lazy-background"></i>
             <span>加油站</span>
           </div>
           <div class="list_right_servirces_item">
-            <i></i>
+            <i class=".lazy-background"></i>
             <span>酒店</span>
           </div>
           <div class="list_right_servirces_item">
-            <i></i>
+            <i class=".lazy-background"></i>
             <span>火车票</span>
           </div>
         </li>
         <li>
           <div class="list_right_servirces_item">
-            <i></i>
+            <i class=".lazy-background"></i>
             <span>众筹</span>
           </div>
           <div class="list_right_servirces_item">
-            <i></i>
+            <i class=".lazy-background"></i>
             <span>理财</span>
           </div>
           <div class="list_right_servirces_item">
-            <i></i>
+            <i class=".lazy-background"></i>
             <span>礼品卡</span>
           </div>
           <div class="list_right_servirces_item">
-            <i></i>
+            <i class=".lazy-background"></i>
             <span>白条</span>
           </div>
         </li>
       </ul>
       <div class="list_right_ads">
-        <img src="@/assets/ad1.png" alt="广告图片" />
+        <img v-lazy="adImg" alt="广告图片" />
       </div>
     </div>
   </div>

@@ -124,7 +124,7 @@ const totalPrice = computed(() => {
             <input type="checkbox" name="chk_list" :checked="cart.isChecked == 1" @change="updateChecked(cart, $event)" />
           </li>
           <li class="cart-list-con2">
-            <img :src="cart.imgUrl" />
+            <img v-webp="cart.imgUrl" />
             <div class="item-msg">{{ cart.skuName }}</div>
           </li>
 

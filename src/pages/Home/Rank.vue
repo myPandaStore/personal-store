@@ -1,39 +1,45 @@
-<script></script>
+<script setup lang="ts">
+// @ts-nocheck
+import hot1Img from "@/assets/Home/hot1.png"
+import hot2Img from "@/assets/Home/hot2.png"
+import iphoneImg from "@/assets/Home/1.jpg"
+
+</script>
 <template>
     <div class="rank">
         <div class="rank_top">
             <div class="rank_top_item">
-                <img src="@/assets/Home/hot1.png" alt="rank背景图片">
+                <img v-lazy="hot1Img" alt="rank背景图片">
                 <p>热卖排行</p>
             </div>
             <div class="rank_top_item">
-                <img src="@/assets/Home/hot2.png" alt="rank背景图片">
+                <img v-lazy="hot2Img" alt="rank背景图片">
                 <p>特价排行</p>
             </div>
             <div class="rank_top_item">
-                <img src="@/assets/Home/hot2.png" alt="rank背景图片">
+                <img v-lazy="hot2Img" alt="rank背景图片">
                 <p>新品排行</p>
             </div>
         </div>
         <div class="rank_list">
             <ul>
                 <li class="rannk_list_item">
-                    <img src="@/assets/Home/1.jpg" alt="iphone图片">
+                    <img v-lazy="iphoneImg" alt="iphone图片">
                     <p>【官网价直降1100】 Apple iPhone 8 Plus 256GB 银色 移动联通电信4G手机</p>
                     <p>定金： ￥100.00</p>
                 </li>
                 <li>
-                    <img src="@/assets/Home/1.jpg" alt="iphone图片">
+                    <img v-lazy="iphoneImg" alt="iphone图片">
                     <p>【官网价直降1100】 Apple iPhone 8 Plus 256GB 银色 移动联通电信4G手机</p>
                     <p>定金： ￥100.00</p>
                 </li>
                 <li>
-                    <img src="@/assets/Home/1.jpg" alt="iphone图片">
+                    <img v-lazy="iphoneImg" alt="iphone图片">
                     <p>【官网价直降1100】 Apple iPhone 8 Plus 256GB 银色 移动联通电信4G手机</p>
                     <p>定金： ￥100.00</p>
                 </li>
                 <li>
-                    <img src="@/assets/Home/1.jpg" alt="iphone图片">
+                    <img v-lazy="iphoneImg" alt="iphone图片">
                     <p>【官网价直降1100】 Apple iPhone 8 Plus 256GB 银色 移动联通电信4G手机</p>
                     <p>定金： ￥100.00</p>
                 </li>

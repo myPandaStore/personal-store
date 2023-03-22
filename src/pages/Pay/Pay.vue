@@ -3,7 +3,19 @@ import { computed, ref, onMounted } from "vue"
 import { useRoute, useRouter } from "vue-router";
 import qrcode from "qrcode"
 import { reqPayInfo, reqPayStatus } from "../../api"
-
+import pay1Img from "./images/pay2.jpg"
+import pay2Img from "./images/pay3.jpg"
+import pay3Img from "./images/pay10.jpg"
+import pay4Img from "./images/pay11.jpg"
+import pay5Img from "./images/pay12.jpg"
+import pay6Img from "./images/pay13.jpg"
+import pay7Img from "./images/pay14.jpg"
+import pay8Img from "./images/pay15.jpg"
+import pay9Img from "./images/pay16.jpg"
+import pay10Img from "./images/pay17.jpg"
+import pay11Img from "./images/pay18.jpg"
+import pay12Img from "./images/pay19.jpg"
+import pay13Img from "./images/pay20.jpg"
 
 const route = useRoute()
 const router = useRouter()
@@ -137,8 +149,8 @@ const open = async () => {
                 </div>
                 <div class="step-cont">
                     <ul class="payType">
-                        <li><img src="./images/pay2.jpg" /></li>
-                        <li><img src="./images/pay3.jpg" /></li>
+                        <li><img v-lazy="pay1Img" alt="pay1"/></li>
+                        <li><img v-lazy="pay2Img" alt="pay2"/></li>
                     </ul>
                 </div>
                 <div class="hr"></div>
@@ -149,19 +161,19 @@ const open = async () => {
                     </div>
                     <div class="step-cont">
                         <ul class="payType">
-                            <li><img src="./images/pay10.jpg" /></li>
-                            <li><img src="./images/pay11.jpg" /></li>
-                            <li><img src="./images/pay12.jpg" /></li>
-                            <li><img src="./images/pay13.jpg" /></li>
-                            <li><img src="./images/pay14.jpg" /></li>
-                            <li><img src="./images/pay15.jpg" /></li>
-                            <li><img src="./images/pay16.jpg" /></li>
-                            <li><img src="./images/pay17.jpg" /></li>
-                            <li><img src="./images/pay18.jpg" /></li>
-                            <li><img src="./images/pay19.jpg" /></li>
-                            <li><img src="./images/pay20.jpg" /></li>
-                            <li><img src="./images/pay21.jpg" /></li>
-                            <li><img src="./images/pay22.jpg" /></li>
+                            <li><img v-lazy="pay3Img" alt="test"/></li>
+                            <li><img v-lazy="pay4Img" alt="test"/></li>
+                            <li><img v-lazy="pay5Img" alt="test"/></li>
+                            <li><img v-lazy="pay6Img" alt="test"/></li>
+                            <li><img v-lazy="pay7Img" alt="test"/></li>
+                            <li><img v-lazy="pay8Img" alt="test"/></li>
+                            <li><img v-lazy="pay9Img" alt="test"/></li>
+                            <li><img v-lazy="pay10Img" alt="test"/></li>
+                            <li><img v-lazy="pay11Img" alt="test"/></li>
+                            <li><img v-lazy="pay12Img" alt="test"/></li>
+                            <li><img v-lazy="pay13Img" alt="test"/></li>
+                            <li><img v-lazy="pay13Img" alt="test"/></li>
+                            <li><img v-lazy="pay13Img" alt="test"/></li>
                         </ul>
                     </div>
                 </div>

@@ -50,7 +50,6 @@ const isSupportWebp = (function () {
 
 export default {
     mounted(el, binding) {
-        debugger
         const imgSrc = binding.value
         const img = new Image()
         if (isSupportWebp) {

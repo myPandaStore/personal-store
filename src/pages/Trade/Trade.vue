@@ -133,7 +133,7 @@ const submitOrder = async() => {
                     <div class="trade_main_order_good_top">商品清单</div>
                     <div class="trade_main_order_good_main" v-for="(order) in orderInfo.detailArrayList" :key="order.skuId">
                         <div class="trade_main_order_good_main_col1">
-                            <img :src="order.imgUrl" alt="商品图片">
+                            <img v-webp="order.imgUrl" alt="商品图片">
                         </div>
                         <div class="trade_main_order_good_main_col2">
                             <div>

@@ -46,6 +46,8 @@
     "yup": "^1.0.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/plugin-proposal-decorators": "^7.21.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "babel-plugin-component": "^1.1.1",
     "unplugin-auto-import": "^0.15.1",

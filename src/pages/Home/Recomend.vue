@@ -1,21 +1,28 @@
-<script></script>
+<script setup lang="ts">
+import clockImg from "@/assets/Home/clock.png"
+import today01Img from "@/assets/Home/today01.png"
+import today02Img from "@/assets/Home/today02.png"
+import today03Img from "@/assets/Home/today03.png"
+import today04Img from "@/assets/Home/today04.png"
+
+</script>
 <template>
     <div class="recommend">
         <div class="recommend_clock">
-            <img src="@/assets/Home/clock.png" alt="">
+            <img v-lazy="clockImg" alt="闹钟图片">
             <h3>今日推荐</h3>
         </div>
         <div class="recommend_item">
-            <img src="@/assets/Home/today01.png" alt="">
+            <img v-lazy="today01Img" alt="推荐01">
         </div>
         <div class="recommend_item">
-            <img src="@/assets/Home/today02.png" alt="">
+            <img v-lazy="today02Img" alt="推荐02">
         </div>
         <div class="recommend_item">
-            <img src="@/assets/Home/today03.png" alt="">
+            <img v-lazy="today03Img" alt="推荐03">
         </div>
         <div class="recommend_item">
-            <img src="@/assets/Home/today04.png" alt="">
+            <img v-lazy="today04Img" alt="推荐04">
         </div>
     </div>
 </template>

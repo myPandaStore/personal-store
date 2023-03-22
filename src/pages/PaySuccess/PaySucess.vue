@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import img from "./images/right.png"
 </script>
 <template>
     <div class="paysuccess">
         <div class="success">
             <h3>
-                <img src="./images/right.png" width="48" height="48" />
+                <img v-lazy="img" width="48" height="48" />
                 恭喜您，支付成功啦！
             </h3>
             <div class="paydetail">
