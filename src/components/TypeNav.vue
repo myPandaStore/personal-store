@@ -6,17 +6,30 @@ import { homeStore } from "@/stores/home.ts";
 // @ts-ignore
 import { throttle } from "@/utils/tool.ts";
 
+interface Subcategory {
+  [key: string]: string[];
+}
+
+interface Category {
+  status?: number | string;
+  cateGoryName?: string;
+  cateGoryId: number;
+  cateGoryChild: Subcategory;
+}
+
+type CategoryList = Category[];
+
 // 商品列表
 const useHomeStore = homeStore();
-const categoryList = useHomeStore.categoryList;
+const categoryList: CategoryList = useHomeStore.categoryList;
 
 const route = useRoute();
 const router = useRouter();
 
 // 存储鼠标移入哪一个分类
-const currentIndex = ref(-1);
+const currentIndex = ref<string|number>(-1);
 // 鼠标移入改变 currentIndex
-const changeIndex = throttle((index) => {
+const changeIndex = throttle((index: string | number) => {
   currentIndex.value = index;
 }, 50);
 // 鼠标移出
@@ -25,7 +38,7 @@ const leaveIndex = () => {
 };
 
 // 默认不展示商品列表
-const isShowCategoryList = ref(false);
+const isShowCategoryList = ref<boolean>(false);
 // 鼠标移入，商品分类进行展示
 const enterShow = () => {
   if (route.path === "/home") {
@@ -39,9 +52,9 @@ const leaveShow = () => {
 };
 
 // 点击商品进行路由跳转
-const goSearch = (event) => {
+const goSearch = (event:Event) => {
   let element = event.target;
-  let category1Id= element.dataset["id"]
+  let category1Id = element?.dataset["id"]
   router.push({
     name: "Search",
     params: {
@@ -56,22 +69,11 @@ const goSearch = (event) => {
       <h2>全部商品分类</h2>
       <transition class="sort">
         <ul class="type_list" v-show="isShowCategoryList" @click="goSearch">
-          <li
-            class="type_list_item"
-            v-for="(item, index) in categoryList.slice(1, 16)"
-            :key="item.cateGoryId"
-            :class="{ cur: currentIndex === index }"
-          >
-            <a
-              @mouseenter="changeIndex(index)"
-              @mouseleave="leaveIndex"
-              :data-id="item.cateGoryId"
-            >
+          <li class="type_list_item" v-for="(item, index) in categoryList.slice(1, 16)" :key="item.cateGoryId"
+            :class="{ cur: currentIndex === index }">
+            <a @mouseenter="changeIndex(index)" @mouseleave="leaveIndex" :data-id="item.cateGoryId">
               {{ item["cateGoryName@1"] }}
-              <div
-                class="type_list_item_subitemList"
-                :style="{ display: currentIndex == index ? 'block' : 'none' }"
-              >
+              <div class="type_list_item_subitemList" :style="{ display: currentIndex == index ? 'block' : 'none' }">
                 <ul v-for="(subItem, index) in item.cateGoryChild" :key="index + subItem">
                   <li v-for="(thirdItem, index) in subItem" :key="index + thirdItem">
                     {{ thirdItem }}
@@ -109,7 +111,7 @@ const goSearch = (event) => {
     margin-bottom: -34px;
     position: relative;
 
-    & > h2 {
+    &>h2 {
       width: 210px;
       height: 45px;
       line-height: 45px;
@@ -130,8 +132,8 @@ const goSearch = (event) => {
       background: #fafafa;
       z-index: 3;
 
-      & > li {
-        & > a {
+      &>li {
+        &>a {
           text-decoration: none;
           color: #333;
           font-size: 14px;
@@ -155,12 +157,12 @@ const goSearch = (event) => {
           min-height: 460px;
           background: #f7f7f7;
 
-          & > ul {
+          &>ul {
             list-style: none;
             display: flex;
             padding: 20px 0 0 14px;
 
-            & > li {
+            &>li {
               border-right: 1px solid black;
               padding: 0 8px;
               height: 16px;
@@ -181,10 +183,10 @@ const goSearch = (event) => {
     }
   }
 
-  & > nav {
+  &>nav {
     margin-left: 210px;
 
-    & > a {
+    &>a {
       margin: 0 22px;
       font-size: 16px;
       color: #333;

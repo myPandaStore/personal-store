@@ -17,6 +17,11 @@ import pay11Img from "./images/pay18.jpg"
 import pay12Img from "./images/pay19.jpg"
 import pay13Img from "./images/pay20.jpg"
 
+interface PayInfo {
+    codeUrl: string;
+    totalFee: number;
+}
+
 const route = useRoute()
 const router = useRouter()
 
@@ -24,16 +29,15 @@ const router = useRouter()
 const timer = ref(null)
 
 // 订单 ID
-const orderId = computed(() => {
+const orderId = computed<number | string>(() => {
     return route.query.orderId
 })
 
 // 初始化支付信息
-const payInfo = ref({
-})
+const payInfo = ref<PayInfo>({})
 
 // 初始化支付状态码
-const code = ref("")
+const code = ref<string>("")
 
 // 获取支付信息
 const getPayInfo = async () => {
@@ -69,7 +73,7 @@ const open = async () => {
             //右上角的叉子没了
             showClose: false,
             //关闭弹出框的配置值
-            beforeClose: (type, instance, done) => {
+            beforeClose: (type:string, instance:any, done:any) => {
                 //type:区分取消|确定按钮
                 //instance：当前组件实例
                 //done:关闭弹出框的方法
@@ -149,8 +153,8 @@ const open = async () => {
                 </div>
                 <div class="step-cont">
                     <ul class="payType">
-                        <li><img v-lazy="pay1Img" alt="pay1"/></li>
-                        <li><img v-lazy="pay2Img" alt="pay2"/></li>
+                        <li><img v-lazy="pay1Img" alt="pay1" /></li>
+                        <li><img v-lazy="pay2Img" alt="pay2" /></li>
                     </ul>
                 </div>
                 <div class="hr"></div>
@@ -161,19 +165,19 @@ const open = async () => {
                     </div>
                     <div class="step-cont">
                         <ul class="payType">
-                            <li><img v-lazy="pay3Img" alt="test"/></li>
-                            <li><img v-lazy="pay4Img" alt="test"/></li>
-                            <li><img v-lazy="pay5Img" alt="test"/></li>
-                            <li><img v-lazy="pay6Img" alt="test"/></li>
-                            <li><img v-lazy="pay7Img" alt="test"/></li>
-                            <li><img v-lazy="pay8Img" alt="test"/></li>
-                            <li><img v-lazy="pay9Img" alt="test"/></li>
-                            <li><img v-lazy="pay10Img" alt="test"/></li>
-                            <li><img v-lazy="pay11Img" alt="test"/></li>
-                            <li><img v-lazy="pay12Img" alt="test"/></li>
-                            <li><img v-lazy="pay13Img" alt="test"/></li>
-                            <li><img v-lazy="pay13Img" alt="test"/></li>
-                            <li><img v-lazy="pay13Img" alt="test"/></li>
+                            <li><img v-lazy="pay3Img" alt="test" /></li>
+                            <li><img v-lazy="pay4Img" alt="test" /></li>
+                            <li><img v-lazy="pay5Img" alt="test" /></li>
+                            <li><img v-lazy="pay6Img" alt="test" /></li>
+                            <li><img v-lazy="pay7Img" alt="test" /></li>
+                            <li><img v-lazy="pay8Img" alt="test" /></li>
+                            <li><img v-lazy="pay9Img" alt="test" /></li>
+                            <li><img v-lazy="pay10Img" alt="test" /></li>
+                            <li><img v-lazy="pay11Img" alt="test" /></li>
+                            <li><img v-lazy="pay12Img" alt="test" /></li>
+                            <li><img v-lazy="pay13Img" alt="test" /></li>
+                            <li><img v-lazy="pay13Img" alt="test" /></li>
+                            <li><img v-lazy="pay13Img" alt="test" /></li>
                         </ul>
                     </div>
                 </div>

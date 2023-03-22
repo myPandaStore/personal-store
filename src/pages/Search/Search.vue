@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onBeforeMount, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { searchStore } from "../../stores/search";
@@ -8,14 +8,19 @@ import phone3Img from "@/assets/Search/phone06.png"
 import phone4Img from "@/assets/Search/phone07.png"
 import phone5Img from "@/assets/Search/mobile03.png"
 
+interface SearchParams {
+  keyword?: string | number;
+  order?: string;
+}
+
 const route = useRoute();
 const useSearchStore = searchStore();
 let keyword = route.params.keyword;
 
 // 分页器当前页码数
-const currentPageNumber = ref(1);
+const currentPageNumber = ref<number>(1);
 // 初始化向服务端发送请求的参数
-const searchParams = ref({
+const searchParams = ref<SearchParams>({
   keyword: "",
   order: "",
 });

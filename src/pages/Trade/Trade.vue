@@ -1,12 +1,36 @@
 <script setup lang="ts">
 import { ref, onMounted, computed, onBeforeMount } from "vue"
-import {useRouter} from "vue-router"
+import { useRouter } from "vue-router"
 import { tradeStore } from "../../stores/trade"
 import { reqSubmitOrder } from "../../api"
 
+interface AddressItem {
+    consignee: string;
+    fullAddress: string;
+    id: Number;
+    isDefault?: boolean | number;
+    phoneNum: string | number;
+    username: string;
+}
+
+type AddressInfo = AddressItem[]
+
+type OrderDetail = {
+    imgUrl: string;
+    skuName: string;
+    skuId: string;
+    orderPrice: number;
+    skuNum: number;
+};
+
+type Order = {
+    orderId: number;
+    detailArrayList: OrderDetail[];
+};
+
 // 初始化用户收货地址信息
 const useTradeStore = tradeStore()
-const addressInfo = computed(() => {
+const addressInfo = computed<AddressInfo>(() => {
     return useTradeStore.address
 })
 onBeforeMount(() => {
@@ -15,41 +39,41 @@ onBeforeMount(() => {
 })
 
 // 初始化订单
-const orderInfo = computed(() => {
+const orderInfo = computed<Order>(() => {
     return useTradeStore.orderInfo
 })
 
 // 初始化订单号
-const orderId = ref("")
+const orderId = ref<string>("")
 
 // 初始化留言信息
-const msg = ref("")
+const msg = ref<string>("")
 
 // 改变默认收货地址
-const changeDefault = (address, addressInfo) => {
+const changeDefault = (address: AddressItem, addressInfo: AddressInfo) => {
     addressInfo.forEach((item) => (item.isDefault = 0))
     address.isDefault = 1
 }
 
-const totalNum = computed(() => {
+const totalNum = computed<number>(() => {
     let sum = 0
-    orderInfo.value?.detailArrayList?.forEach((item) => {
-        sum += item.skuNum
+    orderInfo.value?.detailArrayList?.forEach((item: object) => {
+        sum += item?.skuNum
     })
     return sum
 })
 
-const totalPrice = computed(() => {
+const totalPrice = computed<number>(() => {
     let sum = 0
-    orderInfo.value?.detailArrayList?.forEach((item) => {
+    orderInfo.value?.detailArrayList?.forEach((item: object) => {
         sum += item.skuNum * item.orderPrice
     })
     return sum
 })
 
 // 商品订单提交的最终地址
-const userDefaultAddress = computed(() => {
-    let res = addressInfo?.value?.find((item) => item.isDefault == 1)
+const userDefaultAddress = computed<AddressItem>(() => {
+    let res = addressInfo?.value?.find((item:AddressItem) => item.isDefault == 1)
     if (res === undefined) {
         return
     }
@@ -59,7 +83,7 @@ const userDefaultAddress = computed(() => {
 
 const router = useRouter()
 // 提交订单
-const submitOrder = async() => {
+const submitOrder = async () => {
     // 订单交易编码
     let { orderId: tradeNo } = orderInfo.value
     let defaultAddress = addressInfo?.value?.find((item) => item.isDefault == 1)
@@ -74,7 +98,7 @@ const submitOrder = async() => {
         orderDetailList: orderInfo?.value?.detailArrayList // 商品清单
     }
     try {// 提交订单成功
-        let result = await reqSubmitOrder(tradeNo,data)
+        let result = await reqSubmitOrder(tradeNo, data)
         if (result?.code == 200) {
             orderId.value = result?.tradNo
             router.push('/pay?orderId=' + orderId.value)

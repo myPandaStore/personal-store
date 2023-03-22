@@ -4,17 +4,20 @@ import { reqBanner } from "../../api/index";
 // @ts-ignore
 import img from "@/assets/ad1.png";
 
+type Banner = {
+  imgUrl: string;
+  id: number;
+}
+
 // 广告图片
 const adImg = ref<string>(img)
-const listContainerList = ref([]);
+const listContainerList = ref<Banner[]>([]);
 
 onMounted(async () => {
   let res = await reqBanner();
   // @ts-ignore
   listContainerList.value = res
 });
-
-
 
 </script>
 <template>
@@ -159,7 +162,7 @@ onMounted(async () => {
         background-color: #e4e4e4;
       }
 
-      & > p:first-child {
+      &>p:first-child {
         font-size: 14px;
         line-height: 22px;
         font-weight: bold;
@@ -169,24 +172,24 @@ onMounted(async () => {
       }
     }
 
-    & > ul {
+    &>ul {
       list-style: none;
       margin: 0;
       padding: 0 10px;
 
-      & > li {
+      &>li {
         display: flex;
         align-items: center;
         height: 30px;
 
-        & > p:first-child {
+        &>p:first-child {
           margin-left: 10px;
           font-weight: bold;
           font-style: normal;
           color: #333;
         }
 
-        & > p:nth-child(2) {
+        &>p:nth-child(2) {
           margin-right: 10px;
         }
       }
@@ -199,7 +202,7 @@ onMounted(async () => {
     padding: 0;
     list-style: none;
 
-    & > li {
+    &>li {
       display: flex;
       justify-content: space-between;
       border: 1px solid #e4e4e4;
@@ -213,7 +216,7 @@ onMounted(async () => {
         border-top: none;
       }
 
-      & > .list_right_servirces_item {
+      &>.list_right_servirces_item {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -224,7 +227,7 @@ onMounted(async () => {
           border: none;
         }
 
-        & > i {
+        &>i {
           background-image: url(@/assets/icons.png);
           width: 61px;
           height: 40px;

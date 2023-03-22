@@ -1,10 +1,18 @@
-<script setup>
-import { ref, onMounted, onBeforeMount, computed, nextTick } from "vue";
+<script setup lang="ts">
+import { ref, onMounted, computed } from "vue";
 import { shopCartStore } from "../../stores/shopCart"
 import { throttle } from "../../utils/tool";
 
+interface CartItem {
+  skuName?: String;
+  skuPrice?: Number;
+  imgUrl?: String;
+  isChecked?: Boolean | Number
+}
+
+type CartList = CartItem[]
 // 初始化购物车数据
-const cartInfoList = ref([])
+const cartInfoList = ref<CartList>([])
 
 const useShopCartStore = shopCartStore()
 onMounted(() => {
@@ -18,7 +26,7 @@ const getData = async () => {
 
 
 //修改某个产品的勾选状态
-const updateChecked = async (cart, event) => {
+const updateChecked = async (cart: CartItem, event: Event) => {
   try {
     //如果修改数据成功，再次获取服务器数据（购物车）
     let isChecked = event.target.checked ? "1" : "0";
@@ -42,7 +50,7 @@ const updateAllCartChecked = async (event) => {
 }
 
 // 修改某个产品的个数
-const handler = throttle(async (type, disNum, cart) => {
+const handler = throttle(async (type: string, disNum: number, cart: CartItem) => {
   // type: add minus change
   // disNum: +变化量（+1） -变化量（-1） input最终应该显示的数量
   // cart: 不同的产品
@@ -75,7 +83,7 @@ const handler = throttle(async (type, disNum, cart) => {
 }, 500)
 
 // 删除某一个产品的操作
-const deleteCartBySkuName = async (cart) => {
+const deleteCartBySkuName = async (cart:CartItem) => {
   try {
     // 删除成功再次发请求获取新的数据进行展示
     await useShopCartStore.deleteCartBySkuName(cart.skuName)
@@ -99,7 +107,7 @@ const deleteAllCheckedCart = async () => {
 // 计算购买商品的总价
 const totalPrice = computed(() => {
   let sum = 0
-  cartInfoList.value.forEach((item) => {
+  cartInfoList.value.forEach((item:CartItem) => {
     sum += item.skuNum * item.skuPrice
   })
   return sum

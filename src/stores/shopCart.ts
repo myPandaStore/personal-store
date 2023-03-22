@@ -1,11 +1,23 @@
 import { defineStore } from 'pinia'
 import { reqUpdateCheckedByid, reqCartList, reqAddOrUpdateShopCart, reqDeleteCartBySkuName } from '../api'
+
+interface CartItem {
+    skuName?: String;
+    skuPrice?: Number;
+    imgUrl?: String;
+    isChecked?: Boolean | Number
+}
+
+type CartList = CartItem[]
+
 export const shopCartStore = defineStore('shopCart', {
-    state: () => {
-        return {
-            cartList: [],
-        }
-    },
+    // state: () => {
+    //     return {
+    //         cartList: [],
+    //     }
+    // },
+
+    state: (): { cartList: CartList } => ({ cartList: [] }),
     actions: {
         // 获取购物车列表数据
         async getCartList() {

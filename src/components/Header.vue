@@ -5,15 +5,16 @@ import { useRouter } from "vue-router";
 import { userStore } from "@/stores/user.ts";
 // @ts-ignore
 import img from "@/assets/logo.png";
+
 // head 部分 logo
 const logoImg = ref<string>(img);
 
 // 搜索框关键词
-const keyWord = ref("");
+const keyWord = ref<string | number>("");
 
 // 用户名
 const useUserStore = userStore();
-const userName = computed(() => {
+const userName = computed<string>(() => {
   return useUserStore.userName;
 });
 
@@ -63,12 +64,7 @@ const logOut = async () => {
       </router-link>
       <div class="head_search_container">
         <form class="form" action="" @submit.prevent>
-          <input
-            type="text"
-            id="autocomplete"
-            class="head_search_container_input"
-            v-model="keyWord"
-          />
+          <input type="text" id="autocomplete" class="head_search_container_input" v-model="keyWord" />
           <button class="head_search_container_button" @click="goSearch">搜索</button>
         </form>
       </div>
@@ -92,11 +88,11 @@ const logOut = async () => {
       height: inherit;
       margin-left: 112px;
 
-      & > p {
+      &>p {
         margin-right: 10px;
       }
 
-      & > a {
+      &>a {
         text-decoration: none;
         color: #666;
 
@@ -115,7 +111,7 @@ const logOut = async () => {
       align-items: center;
       margin-left: 380px;
 
-      & > a {
+      &>a {
         text-decoration: none;
         color: #666;
         height: 18px;
@@ -131,14 +127,14 @@ const logOut = async () => {
     display: flex;
     align-items: center;
 
-    & > .logo {
+    &>.logo {
       margin-left: 160px;
     }
 
     &_container {
       margin-left: 414px;
 
-      & > form {
+      &>form {
         display: flex;
       }
 

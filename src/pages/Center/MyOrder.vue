@@ -8,13 +8,13 @@ import goodsImg4 from "./images/itemlike02.png"
 import goodsImg5 from "./images/itemlike01.png"
 
 // 初始化当前页码数
-const page = ref(1)
+const page = ref<number>(1)
 
 // 初始化每页展示的数据个数
-const limit = ref(3)
+const limit = ref<number>(3)
 
 // 初始化我的订单的数据
-const order = ref({})
+const order = ref<object>({})
 
 onMounted(() => {
     getData()
