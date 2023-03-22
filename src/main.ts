@@ -3,35 +3,13 @@ import {
     createApp
 } from 'vue'
 import App from './App.vue'
-import mixin from '@/mixins/index';
 import lazyDirective from './directives/lazy.ts'
 import webpDirective from "./directives/webp"
 import router from './router';
 import TypeNav from '@/components/TypeNav.vue'
 import Carousel from '@/components/Carousel.vue'
-import { Field, Form, ErrorMessage, defineRule, configure } from 'vee-validate';
-import { required, email } from '@vee-validate/rules';
-import { localize, setLocale } from '@vee-validate/i18n';
+import { Field, Form, ErrorMessage } from 'vee-validate';
 import { createPinia } from 'pinia'
-
-
-// 定义规则
-defineRule('required', required);
-defineRule('email', email);
-
-
-// 配置错误提示
-configure({
-    generateMessage: localize({
-        en: {
-            messages: {
-                required: 'This field is required.',
-                email: 'Please enter a valid email address.'
-            }
-        }
-    })
-});
-setLocale('en');
 
 const app = createApp(App)
 

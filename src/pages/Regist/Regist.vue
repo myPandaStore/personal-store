@@ -8,11 +8,12 @@ import { reqGetVerifyCode, reqUserResiter } from "@/api";
 // 手机号
 const phoneNumber = ref("");
 const phoneNumberField = useField("phoneNumber");
+
 const validatePhoneNumber = yup.number().required().min(7);
 // 用户名
 const userName = ref(null);
 const userNameField = useField("userName");
-const validateUserName = yup.string().required().min(4);
+const validateUserName = yup.string().required().min(3);
 // 验证码
 const verifyCode = ref(null);
 const verifyCodeField = useField("verifyCode");
